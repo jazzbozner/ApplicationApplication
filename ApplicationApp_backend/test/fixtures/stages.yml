@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MyString
+  status: MyString
+  startdate: 2020-05-02
+  enddate: 2020-05-02
+  position: one
+
+two:
+  title: MyString
+  status: MyString
+  startdate: 2020-05-02
+  enddate: 2020-05-02
+  position: two
