@@ -3,7 +3,8 @@ class UsersController < ApplicationController
     # All Controllers are working, not sure how to handle errors -> instance will only have errors if we have validations on models --> could also put validations on the front end so all requests have clean/valid data as inputs 
 
     def show
-        render json: @user, include: ['positions.stages.notes']
+        render json: @user, include: ['positions']
+        # ['positions.stages.notes']
     end 
 
     def create
