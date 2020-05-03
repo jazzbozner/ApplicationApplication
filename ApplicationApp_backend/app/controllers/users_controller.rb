@@ -1,21 +1,36 @@
 class UsersController < ApplicationController
     before_action :set_user, only: [:show, :update, :destroy]
-    # before_action :user_params
+    # All Controllers are working, not sure how to handle errors -> instance will only have errors if we have validations on models --> could also put validations on the front end so all requests have clean/valid data as inputs 
 
     def show
-        render json: @user 
+        render json: @user, include: ['positions.stages.notes']
     end 
 
     def create
-        user = User.create(user_params)
-        render json:user
+        user = User.new(user_params)
+        if user.save
+            render json:user
+        # else
+        #     flash[:error_messages] = user.errors.full_messages  
+        #     render json: flash[:error_messages] 
+        end 
+        
     end 
 
     def update
-        @user.update(user_params)
+        if @user.update(user_params)
+            render json:@user
+        # else
+        #     flash[:error_messages] = @user.errors.full_messages  
+        #     render json: flash[:error_messages] 
+        end 
+        
     end 
     
     def destroy 
+        byebug
+        @user.destroy
+        render json:"User Deleted"
     end 
 
     private 
