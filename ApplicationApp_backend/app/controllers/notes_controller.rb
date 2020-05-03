@@ -1,12 +1,14 @@
 class NotesController < ApplicationController
     before_action :set_note, only: [:show, :update, :destroy]
-    
+    # 
+
     def show
-        render json: @note, include: ['user','stages', 'notes', 'tasks'] 
+        render json: @note
+        # , include: ['user','stages', 'notes', 'tasks'] 
     end 
 
     def create
-        note = note.new(note_params)
+        note = Note.new(note_params)
         if note.save
             render json:note
         # else
@@ -28,17 +30,17 @@ class NotesController < ApplicationController
     
     def destroy 
         @note.destroy
-        render json:"note Deleted"
+        render json:"Note Deleted"
     end 
 
     private 
 
     def set_note
-        @note = note.find(params[:id])
+        @note = Note.find(params[:id])
     end
 
     def note_params
-        params.require(:note).permit(:id, :title, :detials, :stage_id )
+        params.require(:note).permit(:id, :title, :details, :stage_id )
     end
 
 end
