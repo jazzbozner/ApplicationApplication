@@ -179,7 +179,6 @@ function posForm(){
     class="input-text"
     />
     <br />
-    <br />
     <input
     type="text"
     name="details"
@@ -188,6 +187,7 @@ function posForm(){
     class="input-text"
     />
     <br />
+    <br>
     <input
       type="submit"
       name="submit"
