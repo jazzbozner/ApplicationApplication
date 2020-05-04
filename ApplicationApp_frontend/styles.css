@@ -17,7 +17,33 @@
     display: flex;
     align-items: flex-start;
 }
+
+
+.edit-input-text-scrollable{
+    height: 100px; 
+    width: 300px;
+    align-content: left;
+    overflow-wrap: break-word;
+    
+    /* text-overflow: auto;
+    size: 250 */
+    /* ex */
+}
+
+.new-input-text-scrollable{
+    height: 100px; 
+    width: 300px;
+    align-content: left;
+    overflow-wrap: break-word;
+}
    
+
+
+
+
+
+
+
 .home{    flex-grow: 3;}
 .positions{    flex-grow: 3;}
 .graphs{    flex-grow: 6;}

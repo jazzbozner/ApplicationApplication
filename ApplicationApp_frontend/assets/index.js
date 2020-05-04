@@ -15,6 +15,7 @@ const posMenuUl = document.getElementById("positions-ul")
 // Biggest Note: everything is contingent on being able to access the User's Id. Figure out how this will be passed along.
 // challenges: edit form will only populate specific input fields and sometimes only up to one or two words....
 // changes: postPosition has become submitPosition and will take in a method as well as a an object of the body key. Will now perform POST or PATCH requests dependent on the method value
+// bugs, change cancel button on new form view, also don't let it save.
 // fetches 
 
 function fetchAll(userId){
@@ -125,7 +126,7 @@ function posForm(position=""){
 
     let formDiv = document.createElement("div")
     let cancelBtn = document.createElement("button")
-    cancelBtn.innerText = "Cancel Edit"
+    cancelBtn.innerText = "Cancel"
     cancelBtn.onclick = ()=> cancelAction(position)
     formDiv.id = "new_position"
     if (position === ""){
@@ -171,13 +172,13 @@ function posForm(position=""){
         class="input-text"
         />
         <br />
-        <input
+        <textarea
         type="text"
         name="requirements"
         value=""
         placeholder="Requirements"
-        class="input-text"
-        />
+        class="new-input-text-scrollable"
+        /></textarea>
         <br />
         <input
             type="date"
@@ -210,7 +211,7 @@ function posForm(position=""){
         name="procon"
         value=""
         placeholder="Pros/Cons:"
-        class="input-text"
+        class="new-input-text-scrollable"
         /></textarea>
         <br />
         <input
@@ -230,7 +231,7 @@ function posForm(position=""){
         name="details"
         value=""
         placeholder="Details"
-        class="input-text"
+        class="new-input-text-scrollable"
         ></textarea>
         <br />
         <input
@@ -269,7 +270,7 @@ function posForm(position=""){
         <input
         type="text"
         name="salary"
-        value=${position.salary}
+        value="${position.salary}"
         placeholder="Salary"
         class="input-text"
         />
@@ -289,27 +290,26 @@ function posForm(position=""){
         <input
         type="text"
         name="website"
-        value=${position.website}
+        value="${position.website}"
         placeholder="Company Website"
         class="input-text"
         />
         <br />
         <label name="requirements">Requirements</label>
         <br />
-        <input
+        <textarea
         type="text"
         name="requirements"
-        value="${position.requirements}"
         placeholder="Requirements"
-        class="input-text"
-        />
+        class="edit-input-text-scrollable"
+        />"${position.requirements}"</textarea>
         <br />
         <label name="postdate">Date Posted</label>
         <br />
         <input
             type="date"
             name="postdate"
-            value=${position.postdate}
+            value="${position.postdate}"
             placeholder="Date Posted"
             class="input-text"
         />
@@ -319,7 +319,7 @@ function posForm(position=""){
         <input
         type="date"
         name="closingdate"
-        value=${position.closingdate}
+        value="${position.closingdate}"
         placeholder="Closing Date"
         class="input-text"
         />
@@ -329,7 +329,7 @@ function posForm(position=""){
         <input
             type="text"
             name="rating"
-            value=${position.rating}
+            value="${position.rating}"
             placeholder="Rating"
             class="input-text"
         />
@@ -339,17 +339,17 @@ function posForm(position=""){
         <textarea
         type="text"
         name="procon"
-        value="${position.procon}"
+        value=
         placeholder="Pros/Cons:"
-        class="input-text"
-        /></textarea>
+        class="edit-input-text-scrollable"
+        />"${position.procon}"</textarea>
         <br />
         <label name="status">Application Status</label>
         <br />
         <input
         type="text"
         name="status"
-        value=${position.status}
+        value="${position.status}"
         placeholder="Application Status:"
         class="input-text"
         />
@@ -360,10 +360,9 @@ function posForm(position=""){
         id="details-input"
         type="textarea"
         name="details"
-        value="${position.details}"
         placeholder="Details"
-        class="input-text"
-        /></textarea>
+        class="edit-input-text-scrollable"
+        />"${position.details}"</textarea>
         <br />
         <input
           type="submit"
@@ -374,6 +373,7 @@ function posForm(position=""){
       </form>`
     }
     // ---> switch back to input --> set a standard width and height -> if they go beyond the size have an overflow scroll property .
+
     // // fetch the former form and repopulate it
     formDiv.appendChild(cancelBtn)
 
@@ -418,7 +418,9 @@ function buildPosLi(position){
 }
 
 function cancelAction(position){
-    buildPosView(position)
+    position ==="" ? posView.innerHTML = "" : buildPosView(position)
+  
+    // if position === "" set to blank div --> eventually set to splash page!
 }
 
 
