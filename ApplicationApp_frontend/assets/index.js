@@ -40,7 +40,6 @@ function postPosition(positionObj){
 function buildLeftColumn(user){
     let userName = document.createElement("h2")
 
-    // debugger 
     userName.innerText = user.username
     userLink.id = user.id 
     // have a link for usrname
@@ -66,7 +65,6 @@ function buildPosView(position){
     let salary = document.createElement("h1")
     let status = document.createElement("h3")
     let website = document.createElement("p")
-    // let closingDate = document.createElement("h3")
 
     company.innerText = position.company
     title.innerText = position.title 
@@ -87,114 +85,38 @@ function posForm(){
 
     let formDiv = document.createElement("div")
     formDiv.id = "new_position"
-    formDiv.innerHTML = `<form id="position-form">
-    <h3>Add a New Position</h3>
-    <input
-      type="text"
-      name="title"
-      value=""
-      placeholder="Job Title"
-      class="input-text"
-    />
-    <br />
-    <input
-      type="text"
-      name="company"
-      value=""
-      placeholder="Company Name"
-      class="input-text"
-    />
-    <br />
-    <input
-    type="text"
-    name="salary"
-    value=""
-    placeholder="Salary"
-    class="input-text"
-    />
-    <br />
-    <input
-    type="text"
-    name="contact"
-    value=""
-    placeholder="Company Contact"
-    class="input-text"
-    />
-    <br />
-    <input
-    type="text"
-    name="website"
-    value=""
-    placeholder="Company Website"
-    class="input-text"
-    />
-    <br />
-    <input
-    type="text"
-    name="requirements"
-    value=""
-    placeholder="Requirements"
-    class="input-text"
-    />
-    <br />
-    <input
-        type="date"
-        name="postdate"
-        value=""
-        placeholder="Date Posted"
-        class="input-text"
-    />
-    <label name="postdate">Date Posted</label>
-    <br />
-    <input
-    type="date"
-    name="closingdate"
-    value=""
-    placeholder="Closing Date"
-    class="input-text"
-    />
-    <label name="closingdate">Closing Date</label>
-    <br />
-    <input
-        type="text"
-        name="rating"
-        value=""
-        placeholder="Rating"
-        class="input-text"
-    />
-    <br />
-    <input
-    type="text"
-    name="procon"
-    value=""
-    placeholder="Pros/Cons:"
-    class="input-text"
-    />
-    <br />
-    <input
-    type="text"
-    name="status"
-    value=""
-    placeholder="Application Status:"
-    class="input-text"
-    />
-    <br />
-    <br />
-    <input
-    type="text"
-    name="details"
-    value=""
-    placeholder="Details"
-    class="input-text"
-    />
-    <br />
-    <input
-      type="submit"
-      name="submit"
-      value="Create Position"
-      class="submit"
-    />
-  </form>`
+    formDiv.innerHTML = `
+        <form id="position-form">
+            <h3>Add a New Position</h3>
+            <input type="text" name="title" value="" placeholder="Job Title" />
+        <br/>
+            <input type="text" name="company" value="" placeholder="Company Name" />
+        <br/>
+            <input type="text" name="salary" value="" placeholder="Salary" />
+        <br/>
+            <input type="text" name="contact" value="" placeholder="Company Contact" />
+        <br/>
+            <input type="text" name="website" value="" placeholder="Company Website" />
+        <br/>
+            <input type="text" name="requirements" value="" placeholder="Requirements" />
+        <br/>
+            <input type="date" name="postdate" value="" placeholder="Date Posted" />
+            <label name="postdate">Date Posted</label>
+        <br/>
+            <input type="date" name="closingdate" value="" placeholder="Closing Date" />
+            <label name="closingdate"> Closing Date </label>
+        <br/>
+            <input type="text" name="rating" value="" placeholder="Rating" />
+        <br/>
+            <input type="text" name="procon" value="" placeholder="Pros/Cons:" />
+        <br/>
+            <input type="text" name="status" value="" placeholder="Application Status:" />
+        <br/>
+        <br/>
+            <input type="text" name="details" value="" placeholder="Details" />
+        <br/>
+            <input type="submit" name="submit" value="Create Position" class="submit" />
+        </form>`
     posView.innerHTML = ""
     posView.appendChild(formDiv)
     let form = document.getElementById("position-form")
