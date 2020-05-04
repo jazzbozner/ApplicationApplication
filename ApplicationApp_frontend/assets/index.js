@@ -84,6 +84,7 @@ function buildLeftColumn(user){
 
 function buildPosView(position){
     posView.innerHTML = ""
+    
     let title = document.createElement("h1")
     let company = document.createElement("h2")
     let contact = document.createElement("h3")

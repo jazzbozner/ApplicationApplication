@@ -2,13 +2,12 @@ const positionID = 1
 
 const STAGE_URL = "http://localhost:3000/stages"
 const taskDIV = document.querySelector("div.tasks")
-
+const graphDIV = document.querySelector("div.graphs")
 
 function fetchTasks(positionID){
     return fetch(`${STAGE_URL}/${positionID}`).then(res => res.json())
     .then(tasks => buildTaskList(tasks))
 }
-
 
 function buildTaskList(tasks){
 
@@ -53,6 +52,7 @@ function buildNewTaskForm(state){
 }
 
 function openTaskForm(){
+    graphDIV.toggleAttribute("hidden")
     let newTaskBtn = document.createElement("button")
     newTaskBtn.innerText = "+"
     newTaskBtn.onclick = () => buildNewTaskForm("")
@@ -66,6 +66,16 @@ function closeTaskForm(){
     taskDIV.prepend(closeBtn)
 }
 
+
+function checkToggle(divName){
+
+    divName.style.display = "none"
+    // divName.toggleAttribute("hidden")
+
+}
+
+checkToggle(graphDIV)
+
 openTaskForm()
-// fetchTasks(positionID)
+fetchTasks(positionID)
 // buildNewTaskForm()
