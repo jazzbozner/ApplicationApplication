@@ -29,7 +29,7 @@ class PositionsController < ApplicationController
     
     def destroy 
         @position.destroy
-        render json:"Position Deleted"
+        # render json:"Position Deleted"
     end 
 
     private 
