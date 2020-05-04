@@ -251,6 +251,7 @@ function posForm(position=""){
           placeholder="Job Title"
           class="input-text"
         />
+        
         <br />
         <label name="company">Company</label>
         <br />
@@ -354,7 +355,7 @@ function posForm(position=""){
         <br />
         <label name="details">Details</label>
         <br />
-        <textarea
+        <textarea   
         id="details-input"
         type="textarea"
         name="details"
@@ -371,6 +372,8 @@ function posForm(position=""){
         />
       </form>`
     }
+    // ---> switch back to input --> set a standard width and height -> if they go beyond the size have an overflow scroll property .
+    // // fetch the former form and repopulate it
     formDiv.appendChild(cancelBtn)
 
     posView.innerHTML = ""
