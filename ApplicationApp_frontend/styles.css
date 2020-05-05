@@ -74,19 +74,16 @@ background-color: cadetblue;
 
 
 div.scrolling-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    flex-wrap: nowrap;
+    width: auto;
     background-color: paleturquoise;
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
-    /* width: 150px;
-    height: 600px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    transform: rotate(-90deg);
-    transform-origin: right top;
-    transform:rotate(-90deg) translateY(-100px);
-    padding-top: 160px;
-    padding-bottom: 0px; */
+
 }
 
 .scrolling-wrapper > div {
@@ -95,10 +92,16 @@ div.scrolling-wrapper {
     text-align: center;
     padding: 14px;
     text-decoration: none;
-    /* width: 100px;
-    height: 100px;
-    transform: rotate(90deg);
-    transform-origin: right top; */
+    flex: auto;
+
+    /* pointer-events: none; */
+    /* flex: 0 0 auto; */
+    /* width: 100vw;
+    height: 100vh; */
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .scrolling-wrapper div:hover{
     background-color: orange;

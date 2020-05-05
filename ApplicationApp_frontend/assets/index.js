@@ -77,6 +77,10 @@ function submitPosition(positionObj, method=""){
 function buildStagesBar(position){
     scrollingWrapper.innerHTML = ""
     scrollingWrapper.style = "max-width:800px;margin:0 auto;"
+    scrollingWrapper.addEventListener('wheel', function(e) {
+        if (e.deltaY > 0) {scrollingWrapper.scrollLeft += 100;}
+        else {scrollingWrapper.scrollLeft -= 100;}
+      });
 
     position.stages.forEach(stage => {
        
