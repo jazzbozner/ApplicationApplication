@@ -13,6 +13,7 @@ const tasks = document.body.querySelector(".tasks")
 
 const userId = 1
 const posMenuUl = document.getElementById("positions-ul")
+const stageUl = document.getElementById('stage-list')
 
 
 
@@ -127,6 +128,7 @@ function buildLeftColumn(user){
 
 function buildPosView(position){
     posView.innerHTML = ""
+
     
     let title = document.createElement("h1")
     let company = document.createElement("h2")
@@ -148,7 +150,9 @@ function buildPosView(position){
     expBtn.innerText = "EXPAND"
     expBtn.onclick = ()=> showDetails()
     midDiv.setAttribute("hidden", true)
+    // let addStageBtn = document.createElement("button")
 
+    posView.id = position.id
     company.innerText = position.company
     title.innerText = position.title 
     dates.innerText = `Posting Date --- Closing Date \n${position.postdate} --- ${position.closingdate}`
@@ -168,6 +172,11 @@ function buildPosView(position){
     deleteBtn.onclick = ()=> deletePos(position)
     midDiv.append(contact, website, rating, procon, requirements, details)
     posView.append(company, title, salary, dates, status, expBtn, editBtn, deleteBtn, midDiv)
+
+    // addStageBtn.innerText = 'Add Stage'
+    // addStageBtn.onclick = ()=> stageForm(position)
+
+    // posView.append(company, title, salary, dates, status, contact, website, rating, procon, requirements, details, editBtn, deleteBtn, addStageBtn)
 }
 
 function posForm(position=""){
@@ -445,14 +454,12 @@ function handlePosSubmit(position=""){
 
 }
 
-
-
 function buttonBuilders(){
     // position form
     let newPosBtn = document.createElement("button")
     newPosBtn.innerText = "+"
+    posMenu.before(newPosBtn);
     newPosBtn.onclick = () => posForm()
-    posMenu.prepend(newPosBtn)
 }
 
 // callbacks
@@ -468,6 +475,7 @@ function buildPosLi(position){
             buildPosView(position)
             fetchPosition(position.id)
         } 
+        // li.onclick = ()=> buildPosView(position); //include buildStageLIst(position) function to populate position areas on position click and first/last stage area on position click 
         li.innerText = position.title
         li.setAttribute('data-pos-id', `${position.id}`)
         // have a link for positions
@@ -475,7 +483,7 @@ function buildPosLi(position){
 }
 
 function cancelAction(position){
-    position ==="" ? posView.innerHTML = "" : buildPosView(position)
+    position === "" ? posView.innerHTML = "" : buildPosView(position)
   
     // if position === "" set to blank div --> eventually set to splash page!
 }
