@@ -3,13 +3,18 @@ const posMenu = document.body.querySelector(".positions")
 
 const graphs = document.body.querySelector(".graphs")
 const posView = document.body.querySelector(".position-view")
+
 const stageView = document.body.querySelector(".stage-view")
+const scrollingWrapper = document.body.querySelector(".scrolling-wrapper")
+
 const noteView = document.body.querySelector(".note-view")
 
 const tasks = document.body.querySelector(".tasks")
 
 const userId = 1
 const posMenuUl = document.getElementById("positions-ul")
+const stageUl = document.getElementById('stage-list')
+
 
 
 // Biggest Note: everything is contingent on being able to access the User's Id. Figure out how this will be passed along.
@@ -22,6 +27,14 @@ function fetchAll(userId){
     fetch(`http://localhost:3000/users/${userId}`)
     .then(resp => resp.json())
     .then(user => buildLeftColumn(user))
+    
+}
+
+function fetchPosition(posId){
+    fetch(`http://localhost:3000/positions/${posId}`)
+    .then(resp => resp.json())
+    .then(position => buildStagesBar(position))
+    
 }
 
 function deletePos(position){
@@ -59,6 +72,36 @@ function submitPosition(positionObj, method=""){
     })
 }
 
+
+// builders: specifically for row 3
+
+function buildStagesBar(position){
+    scrollingWrapper.innerHTML = ""
+    scrollingWrapper.style = "max-width:800px;margin:0 auto;"
+
+    position.stages.forEach(stage => {
+       
+        let stageDiv = document.createElement("div")
+        stageDiv.classList.add("stage-card")
+        // stageDiv.innerText = stage.title
+        stageDiv.innerHTML = `<br><h2>${stage.title}<h2><br>`
+        stageDiv.onclick = ()=> {
+            console.log(`${stage.title} button was clicked`)
+            allNotes(stage)
+        } 
+        scrollingWrapper.append(stageDiv)
+    })
+    let addStage = document.createElement("div")
+    addStage.classList.add("stage-card")
+    addStage.innerHTML = "Add Next Stage"
+    addStage.onclick = () => console.log("bring me the form for a new stage")
+    scrollingWrapper.appendChild(addStage)
+
+}
+
+
+
+
 // builders
 
 function buildLeftColumn(user){
@@ -85,6 +128,7 @@ function buildLeftColumn(user){
 
 function buildPosView(position){
     posView.innerHTML = ""
+
     
     let title = document.createElement("h1")
     let company = document.createElement("h2")
@@ -99,8 +143,16 @@ function buildPosView(position){
     let website = document.createElement("p")
     let editBtn = document.createElement("button")
     let deleteBtn = document.createElement("button")
-    // let closingDate = document.createElement("h3")
 
+    let midDiv = document.createElement("div")
+    midDiv.id = "pos-details"
+    let expBtn = document.createElement("button")
+    expBtn.innerText = "EXPAND"
+    expBtn.onclick = ()=> showDetails()
+    midDiv.setAttribute("hidden", true)
+    // let addStageBtn = document.createElement("button")
+
+    posView.id = position.id
     company.innerText = position.company
     title.innerText = position.title 
     dates.innerText = `Posting Date --- Closing Date \n${position.postdate} --- ${position.closingdate}`
@@ -118,8 +170,13 @@ function buildPosView(position){
 
     deleteBtn.innerText = "Delete Position"
     deleteBtn.onclick = ()=> deletePos(position)
+    midDiv.append(contact, website, rating, procon, requirements, details)
+    posView.append(company, title, salary, dates, status, expBtn, editBtn, deleteBtn, midDiv)
 
-    posView.append(company, title, salary, dates, status, contact, website, rating, procon, requirements, details, editBtn, deleteBtn)
+    // addStageBtn.innerText = 'Add Stage'
+    // addStageBtn.onclick = ()=> stageForm(position)
+
+    // posView.append(company, title, salary, dates, status, contact, website, rating, procon, requirements, details, editBtn, deleteBtn, addStageBtn)
 }
 
 function posForm(position=""){
@@ -397,20 +454,28 @@ function handlePosSubmit(position=""){
 
 }
 
-
-
 function buttonBuilders(){
     // position form
     let newPosBtn = document.createElement("button")
     newPosBtn.innerText = "+"
+    posMenu.before(newPosBtn);
     newPosBtn.onclick = () => posForm()
-    posMenu.prepend(newPosBtn)
 }
 
 // callbacks
+function showDetails(){
+    let detailDiv = document.querySelector("#pos-details")
+    detailDiv.toggleAttribute("hidden")
+}
+
+
 function buildPosLi(position){
     let li = document.createElement("li")
-        li.onclick = ()=> buildPosView(position)
+        li.onclick = ()=> {
+            buildPosView(position)
+            fetchPosition(position.id)
+        } 
+        // li.onclick = ()=> buildPosView(position); //include buildStageLIst(position) function to populate position areas on position click and first/last stage area on position click 
         li.innerText = position.title
         li.setAttribute('data-pos-id', `${position.id}`)
         // have a link for positions
@@ -418,13 +483,31 @@ function buildPosLi(position){
 }
 
 function cancelAction(position){
-    position ==="" ? posView.innerHTML = "" : buildPosView(position)
+    position === "" ? posView.innerHTML = "" : buildPosView(position)
   
     // if position === "" set to blank div --> eventually set to splash page!
 }
 
+// frontend dynamics
 
 
 // invoke functions
 buttonBuilders()
 fetchAll(userId)
+// function() {
+//     function scrollHorizontally(e) {
+//         e = window.event || e;
+//         const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+//         document.getElementById('scrolling-wrapper').scrollLeft -= (delta*40); // Multiplied by 40
+//         e.preventDefault();
+//     }
+//     if (document.getElementById('scrolling-wrapper').addEventListener) {
+//         // IE9, Chrome, Safari, Opera
+//         document.getElementById('scrolling-wrapper').addEventListener("mousewheel", scrollHorizontally, false);
+//         // Firefox
+//         document.getElementById('scrolling-wrapper').addEventListener("DOMMouseScroll", scrollHorizontally, false);
+//     } else {
+//         // IE 6/7/8
+//         document.getElementById('scrolling-wrapper').attachEvent("onmousewheel", scrollHorizontally);
+//     }
+// };

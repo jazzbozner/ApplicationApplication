@@ -8,9 +8,10 @@ class NotesController < ApplicationController
     end 
 
     def create
+        
         note = Note.new(note_params)
         if note.save
-            render json:note
+            render json: note
         # else
         #     flash[:error_messages] = note.errors.full_messages  
         #     render json: flash[:error_messages] 
