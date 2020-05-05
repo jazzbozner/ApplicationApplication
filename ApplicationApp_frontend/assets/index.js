@@ -143,7 +143,6 @@ function buildPosView(position){
     let website = document.createElement("p")
     let editBtn = document.createElement("button")
     let deleteBtn = document.createElement("button")
-<<<<<<< HEAD
 
     let midDiv = document.createElement("div")
     midDiv.id = "pos-details"
@@ -151,9 +150,7 @@ function buildPosView(position){
     expBtn.innerText = "EXPAND"
     expBtn.onclick = ()=> showDetails()
     midDiv.setAttribute("hidden", true)
-=======
     // let addStageBtn = document.createElement("button")
->>>>>>> feature
 
     posView.id = position.id
     company.innerText = position.company
@@ -173,16 +170,13 @@ function buildPosView(position){
 
     deleteBtn.innerText = "Delete Position"
     deleteBtn.onclick = ()=> deletePos(position)
-<<<<<<< HEAD
     midDiv.append(contact, website, rating, procon, requirements, details)
     posView.append(company, title, salary, dates, status, expBtn, editBtn, deleteBtn, midDiv)
-=======
 
     // addStageBtn.innerText = 'Add Stage'
     // addStageBtn.onclick = ()=> stageForm(position)
 
-    posView.append(company, title, salary, dates, status, contact, website, rating, procon, requirements, details, editBtn, deleteBtn, addStageBtn)
->>>>>>> feature
+    // posView.append(company, title, salary, dates, status, contact, website, rating, procon, requirements, details, editBtn, deleteBtn, addStageBtn)
 }
 
 function posForm(position=""){
@@ -477,14 +471,11 @@ function showDetails(){
 
 function buildPosLi(position){
     let li = document.createElement("li")
-<<<<<<< HEAD
         li.onclick = ()=> {
             buildPosView(position)
             fetchPosition(position.id)
         } 
-=======
-        li.onclick = ()=> buildPosView(position); //include buildStageLIst(position) function
->>>>>>> feature
+        // li.onclick = ()=> buildPosView(position); //include buildStageLIst(position) function to populate position areas on position click and first/last stage area on position click 
         li.innerText = position.title
         li.setAttribute('data-pos-id', `${position.id}`)
         // have a link for positions
