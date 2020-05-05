@@ -8,6 +8,7 @@
 
     
 }
+
 .row2{
     display: flex;
     align-items: flex-start;
@@ -38,10 +39,32 @@
 }
    
 
+.high { background-color: #FF958E}
+.medium {background-color: #FEF9A5;}
+.low { background-color: #C7FFB4;}
 
+#new-task{
+    display: block;
+    padding-left: 25px;
+    background-color: lightgray;
+}
 
+.delete-button{
+    border-radius: 8px;
+    background-color: inherit;
+}
+.edit-button{
+    border-radius: 8px;
+    background-color: inherit;
+}
+.complete-button{
+    border-radius: 8px;
+    background-color: inherit;
+}
 
-
+.task-list {
+    position: fixed; height: 500px; overflow: scroll; padding-right: 15px;
+}
 
 
 .home{    flex-grow: 3;}
@@ -50,7 +73,7 @@
 .position-view{    flex-grow: 6;}
 .stage-view{    flex-grow: 6;}
 .note-view{    flex-grow: 6;}
-.tasks{    flex-grow: 3;}
+.tasks{  flex-grow: 1; width: 250px; }
 
 /* .home { grid-area: 1 / 1 / 2 / 2; height: 100px;}
 .positions { grid-area: 2 / 1 / 6 / 2; }
