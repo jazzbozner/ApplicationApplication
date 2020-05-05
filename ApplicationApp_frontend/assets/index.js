@@ -13,6 +13,7 @@ const tasks = document.body.querySelector(".tasks")
 
 const userId = 1
 const posMenuUl = document.getElementById("positions-ul")
+const stageUl = document.getElementById('stage-list')
 
 
 
@@ -127,6 +128,7 @@ function buildLeftColumn(user){
 
 function buildPosView(position){
     posView.innerHTML = ""
+
     
     let title = document.createElement("h1")
     let company = document.createElement("h2")
@@ -141,6 +143,7 @@ function buildPosView(position){
     let website = document.createElement("p")
     let editBtn = document.createElement("button")
     let deleteBtn = document.createElement("button")
+<<<<<<< HEAD
 
     let midDiv = document.createElement("div")
     midDiv.id = "pos-details"
@@ -148,7 +151,11 @@ function buildPosView(position){
     expBtn.innerText = "EXPAND"
     expBtn.onclick = ()=> showDetails()
     midDiv.setAttribute("hidden", true)
+=======
+    // let addStageBtn = document.createElement("button")
+>>>>>>> feature
 
+    posView.id = position.id
     company.innerText = position.company
     title.innerText = position.title 
     dates.innerText = `Posting Date --- Closing Date \n${position.postdate} --- ${position.closingdate}`
@@ -166,8 +173,16 @@ function buildPosView(position){
 
     deleteBtn.innerText = "Delete Position"
     deleteBtn.onclick = ()=> deletePos(position)
+<<<<<<< HEAD
     midDiv.append(contact, website, rating, procon, requirements, details)
     posView.append(company, title, salary, dates, status, expBtn, editBtn, deleteBtn, midDiv)
+=======
+
+    // addStageBtn.innerText = 'Add Stage'
+    // addStageBtn.onclick = ()=> stageForm(position)
+
+    posView.append(company, title, salary, dates, status, contact, website, rating, procon, requirements, details, editBtn, deleteBtn, addStageBtn)
+>>>>>>> feature
 }
 
 function posForm(position=""){
@@ -445,14 +460,12 @@ function handlePosSubmit(position=""){
 
 }
 
-
-
 function buttonBuilders(){
     // position form
     let newPosBtn = document.createElement("button")
     newPosBtn.innerText = "+"
+    posMenu.before(newPosBtn);
     newPosBtn.onclick = () => posForm()
-    posMenu.prepend(newPosBtn)
 }
 
 // callbacks
@@ -464,10 +477,14 @@ function showDetails(){
 
 function buildPosLi(position){
     let li = document.createElement("li")
+<<<<<<< HEAD
         li.onclick = ()=> {
             buildPosView(position)
             fetchPosition(position.id)
         } 
+=======
+        li.onclick = ()=> buildPosView(position); //include buildStageLIst(position) function
+>>>>>>> feature
         li.innerText = position.title
         li.setAttribute('data-pos-id', `${position.id}`)
         // have a link for positions
@@ -475,7 +492,7 @@ function buildPosLi(position){
 }
 
 function cancelAction(position){
-    position ==="" ? posView.innerHTML = "" : buildPosView(position)
+    position === "" ? posView.innerHTML = "" : buildPosView(position)
   
     // if position === "" set to blank div --> eventually set to splash page!
 }
