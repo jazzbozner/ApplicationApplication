@@ -4,7 +4,7 @@ class StagesController < ApplicationController
 
     def show
         
-        render json: @stage, include: ['position', 'notes']
+        render json: @stage, include: ['position', 'notes', 'tasks']
     end 
 
     def create
