@@ -37,6 +37,7 @@ function fetchPosition(posId){
 }
 
 function deletePos(position){
+    debugger
     fetch(`http://localhost:3000/positions/${position.id}`,{
         method: "DELETE",
         headers: {
