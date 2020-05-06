@@ -5,7 +5,7 @@ const taskFormDIV = document.querySelector("div.task-form")
 const taskListUL = document.querySelector("div.task-list")
 const tasks = document.body.querySelector(".tasks")
 // Notes
-const NOTE_URL = "http://localhost:3000/stages"
+const NOTE_URL = "http://localhost:3000/notes"
 const notesContainerDiv = document.getElementById("notes-container")
 const notesView = document.body.querySelector(".note-view")
 const noteView = document.body.querySelector(".note-view")
@@ -27,8 +27,6 @@ const userId = 1
 // Analytics
 const graphs = document.body.querySelector(".graphs")
 
-
-
 // Biggest Note: everything is contingent on being able to access the User's Id. Figure out how this will be passed along.
 // challenges: edit form will only populate specific input fields and sometimes only up to one or two words....
 // changes: postPosition has become submitPosition and will take in a method as well as a an object of the body key. Will now perform POST or PATCH requests dependent on the method value
@@ -36,10 +34,11 @@ const graphs = document.body.querySelector(".graphs")
 // fetches 
 
 function fetchAll(userId){
+    debugger
     fetch(`${USER_URL}/${userId}`)
     .then(resp => resp.json())
     .then(user => buildLeftColumn(user))
-    
+
 }
 
 function fetchPosition(posId){
@@ -50,6 +49,7 @@ function fetchPosition(posId){
 }
 
 function deletePos(position){
+    debugger
     fetch(`${POSITION_URL}/${position.id}`,{
         method: "DELETE",
         headers: {
@@ -57,9 +57,9 @@ function deletePos(position){
             accept: "application/json"
         }
     })
-    .then(()=> {
+    .then(() => {
         fetchAll(userId)
-        posForm()
+        // posForm() Add splash 
     })
 }
 
@@ -125,7 +125,7 @@ function buildLeftColumn(user){
     posMenuUl.innerHTML = ""
     let userName = document.createElement("h2")
     userName.innerText = user.username
-    // userLink.id = user.id 
+    userLink.id = user.id 
     // have a link for usrname
     // userName.onclick = ()=> openUser(user)
     
@@ -501,7 +501,7 @@ function handlePosSubmit(position=""){
         rating: p.rating.value, 
         procon: p.procon.value, 
         status: p.status.value, 
-        user_id: position.user_id
+        user_id: userLink.id
     }
 
     if (position === ""){
@@ -519,13 +519,6 @@ function buttonBuilders(){
     posMenu.before(newPosBtn);
     newPosBtn.onclick = () => posForm()
 }
-
-// callbacks
-function showDetails(){
-    let detailDiv = document.querySelector("#pos-details")
-    detailDiv.toggleAttribute("hidden")
-}
-
 
 function buildPosLi(position){
     let li = document.createElement("li")
@@ -545,13 +538,16 @@ function cancelAction(position){
   
     // if position === "" set to blank div --> eventually set to splash page!
 }
-
-// frontend dynamics
-
+// callbacks
+function showDetails(){
+    let detailDiv = document.querySelector("#pos-details")
+    detailDiv.toggleAttribute("hidden")
+}
 
 // invoke functions
 buttonBuilders()
 fetchAll(userId)
+
 // function() {
 //     function scrollHorizontally(e) {
 //         e = window.event || e;

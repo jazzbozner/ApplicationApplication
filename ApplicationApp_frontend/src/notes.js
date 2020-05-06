@@ -8,7 +8,7 @@
 
 function allNotes(stage){
     
-    fetch(`${NOTE_URL}/${stage.id}`)
+    fetch(`${STAGE_URL}/${stage.id}`)
     .then(resp => resp.json())
     .then(stage => buildNotes(stage))
 }
@@ -16,10 +16,10 @@ function allNotes(stage){
 function submitNote(note, method=""){
     let stageId = note.stage_id
     let url = NOTE_URL
+    debugger
     if (method === "PATCH"){
         url = `${NOTE_URL}/${note.id}`
     }
-    
     fetch(url,{
         method: method,
         headers: {
