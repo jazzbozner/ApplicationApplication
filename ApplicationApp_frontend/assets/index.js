@@ -1,31 +1,31 @@
-// tasks
-const STAGE_URL = "http://localhost:3000/stages"
+// Tasks
 const TASK_URL = "http://localhost:3000/tasks"
 const taskDIV = document.querySelector("div.tasks")
 const taskFormDIV = document.querySelector("div.task-form")
 const taskListUL = document.querySelector("div.task-list")
-// notes
+const tasks = document.body.querySelector(".tasks")
+// Notes
+const NOTE_URL = "http://localhost:3000/stages"
 const notesContainerDiv = document.getElementById("notes-container")
 const notesView = document.body.querySelector(".note-view")
+const noteView = document.body.querySelector(".note-view")
 // stages
+const STAGE_URL = "http://localhost:3000/stages"
 const STAGE = document.body.querySelector('.stage')
-//  index 
-const userLink = document.body.querySelector(".home")
-const posMenu = document.body.querySelector(".positions")
-
-const graphs = document.body.querySelector(".graphs")
-const posView = document.body.querySelector(".position-view")
-
 const stageView = document.body.querySelector(".stage-view")
 const scrollingWrapper = document.body.querySelector(".scrolling-wrapper")
-
-const noteView = document.body.querySelector(".note-view")
-
-const tasks = document.body.querySelector(".tasks")
-
-const userId = 1
-const posMenuUl = document.getElementById("positions-ul")
 const stageUl = document.getElementById('stage-list')
+//  Positions
+const POSITION_URL = "http://localhost:3000/positions"
+const userLink = document.body.querySelector(".home")
+const posMenu = document.body.querySelector(".positions")
+const posMenuUl = document.getElementById("positions-ul")
+const posView = document.body.querySelector(".position-view")
+// user id
+const USER_URL = "http://localhost:3000/users"
+const userId = 1
+// Analytics
+const graphs = document.body.querySelector(".graphs")
 
 
 
@@ -36,21 +36,21 @@ const stageUl = document.getElementById('stage-list')
 // fetches 
 
 function fetchAll(userId){
-    fetch(`http://localhost:3000/users/${userId}`)
+    fetch(`${USER_URL}/${userId}`)
     .then(resp => resp.json())
     .then(user => buildLeftColumn(user))
     
 }
 
 function fetchPosition(posId){
-    fetch(`http://localhost:3000/positions/${posId}`)
+    fetch(`${POSITION_URL}/${posId}`)
     .then(resp => resp.json())
     .then(position => buildStagesBar(position))
     
 }
 
 function deletePos(position){
-    fetch(`http://localhost:3000/positions/${position.id}`,{
+    fetch(`${POSITION_URL}/${position.id}`,{
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
@@ -65,9 +65,9 @@ function deletePos(position){
 
 function submitPosition(positionObj, method=""){
     
-    let url = `http://localhost:3000/positions`
+    let url = POSITION_URL
     if (method === "PATCH"){
-        url = `http://localhost:3000/positions/${positionObj.id}`
+        url = `${POSITION_URL}/${positionObj.id}`
     }
     fetch(url, {
         method: method,
@@ -83,7 +83,6 @@ function submitPosition(positionObj, method=""){
         buildPosView(position)
     })
 }
-
 
 // builders: specifically for row 3
 
@@ -119,17 +118,14 @@ function buildStagesBar(position){
 
 }
 
-
-
-
 // builders
-
+// step 1 modifed
 function buildLeftColumn(user){
-    userLink.innerHTML = ""
+    // userLink.innerHTML = ""
     posMenuUl.innerHTML = ""
     let userName = document.createElement("h2")
     userName.innerText = user.username
-    userLink.id = user.id 
+    // userLink.id = user.id 
     // have a link for usrname
     // userName.onclick = ()=> openUser(user)
     
@@ -142,13 +138,12 @@ function buildLeftColumn(user){
     // newPosBtn.onclick = () => posForm()
     // posMenu.prepend(newPosBtn)
     
-    userLink.appendChild(userName)
+    // userLink.appendChild(userName)
     
 }
 
 function buildPosView(position){
     posView.innerHTML = ""
-
     
     let title = document.createElement("h1")
     let company = document.createElement("h2")
@@ -491,6 +486,7 @@ function posForm(position=""){
 
 function handlePosSubmit(position=""){
     event.preventDefault()
+    console.log(position)
     let p = event.target
     let positionObj = {
         title: p.title.value,
@@ -505,7 +501,7 @@ function handlePosSubmit(position=""){
         rating: p.rating.value, 
         procon: p.procon.value, 
         status: p.status.value, 
-        user_id: userLink.id
+        user_id: position.user_id
     }
 
     if (position === ""){

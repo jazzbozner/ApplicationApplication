@@ -8,16 +8,16 @@
 
 function allNotes(stage){
     
-    fetch(`http://localhost:3000/stages/${stage.id}`)
+    fetch(`${NOTE_URL}/${stage.id}`)
     .then(resp => resp.json())
     .then(stage => buildNotes(stage))
 }
 
 function submitNote(note, method=""){
     let stageId = note.stage_id
-    let url = `http://localhost:3000/notes`
+    let url = NOTE_URL
     if (method === "PATCH"){
-        url = `http://localhost:3000/notes/${note.id}`
+        url = `${NOTE_URL}/${note.id}`
     }
     
     fetch(url,{
@@ -30,13 +30,13 @@ function submitNote(note, method=""){
     .then(resp => resp.json())
     .then(note => {
         let stage = {id: note.stage_id}
-        allNotes(stage)
+        allNotes(stage) //unqexpected end of JSON input
     })
 }
 
 function deleteNote(note){
     
-    let url = `http://localhost:3000/notes/${note.id}`
+    let url = `${NOTE_URL}/${note.id}`
     fetch(url,{
         method: "DELETE",
         headers: {
@@ -166,7 +166,7 @@ function openNote(note){
 // newNoteButton
 function newNoteButtonBuilder(stage){
     notesView.innerHTML = ""
-    notesView.innerText = "Notes"
+    // notesView.innerText = "Notes"
     let newNoteBtn = document.createElement("button")
     newNoteBtn.innerText = "+"
     newNoteBtn.setAttribute("data-stage-id", stage.id)

@@ -53,7 +53,7 @@ function stageForm(object, condition="") { //<--- position will go in the argume
         endDate.name = 'enddate'
         submit.type = 'submit'
         submit.name = 'submit'
-        submit.innerText = 'Add Stage'
+        submit.innerText = 'Submit'
 
         form.append(title, status, startDate, endDate, submit)
         div.appendChild(form)
@@ -86,7 +86,7 @@ function stageForm(object, condition="") { //<--- position will go in the argume
         endDate.value = stage.enddate
         submit.type = 'submit'
         submit.name = 'submit'
-        submit.innerText = 'Add Stage'
+        submit.innerText = 'Submit Edit'
 
         form.append(title, status, startDate, endDate, submit)
         div.appendChild(form)
@@ -141,7 +141,7 @@ function handleStageSubmit(object, condition="") {
 // // fetches
 
 function submitStage(stageObj, method = '') {
-    let url = "http://localhost:3000/stages"
+    let url = STAGE_URL
     if (method === 'PATCH') {
         url = `http://localhost:3000/stages/${stageObj.id}`
     }

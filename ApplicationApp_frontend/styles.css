@@ -1,15 +1,102 @@
-.parent {
-    display: flex;
-    align-items: flex-start;
-    /* grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px; */
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap');
 
-    
+.nav {
+    /* border: white; */
+    font-family: 'Jost', sans-serif;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: 30 px 10%;
+    background-color: aquamarine;
+    align-items: center;
 }
 
-.row2{
+.nav li {
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.nav button {
+    justify-self: right;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 50px;
+}
+
+
+body {
+    font-family: 'Jost', sans-serif;
+}
+
+/* modified */
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    }
+    
+.div1 { 
+    grid-area: 1 / 1 / 6 / 2; 
+    grid-template-columns: 5;
+    background-color:  cadetblue; 
+    overflow-x: hidden; 
+    overflow-x: auto; 
+    text-align:justify;
+    column-gap: 5px;
+    row-gap: 2em;
+}
+.div2 { 
+    grid-area: 1 / 2 / 3 / 5; 
+    background-color:  rgb(181, 216, 218); 
+    /* overflow-x: hidden;  */
+    overflow-x: auto;
+    column-gap: 5px; 
+    row-gap: 1em;
+}
+.div3 { 
+    grid-area: 3 / 2 / 4 / 5;
+    background-color:  rgb(181, 216, 218); 
+    overflow-x: hidden; 
+    overflow-x: auto;
+    column-gap: 5px; 
+    row-gap: 1em;
+}
+.div4 { 
+    grid-area: 4 / 2 / 6 / 5;
+    background-color:  rgb(181, 216, 218); 
+    overflow-x: hidden; 
+    overflow-x: auto; 
+    column-gap: 5px;
+    row-gap: 1em;
+}
+.div5 { 
+    grid-area: 1 / 5 / 3 / 6;
+    background-color:  rgb(181, 216, 218); 
+    overflow-x: hidden; 
+    overflow-x: auto;
+    column-gap: 5px; 
+    row-gap: 1em;
+}
+.div6 { 
+    grid-area: 3 / 5 / 6 / 6;
+    background-color:  rgb(181, 216, 218); 
+    overflow-x: hidden;
+    overflow-x: auto; 
+    column-gap: 5px;
+    row-gap: 1em;
+}
+
+/* original */
+/* .parent {
+    display: flex;
+    align-items: flex-start;
+} */
+
+/* .row2{
     display: flex;
     align-items: flex-start;
 }
@@ -23,7 +110,7 @@
 .row4{
     display: flex;
     align-items: center;
-}
+} */
 
 .note-card{
     padding-right: 100px;
@@ -80,7 +167,7 @@ div.scrolling-wrapper {
     align-items: flex-start;
     flex-wrap: nowrap;
     width: auto;
-    background-color: paleturquoise;
+    background-color: grey;
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
@@ -118,31 +205,6 @@ padding-top: 15px;
 } 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .high { background-color: #FF958E}
 .medium {background-color: #FEF9A5;}
 .low { background-color: #C7FFB4;}
@@ -167,7 +229,11 @@ padding-top: 15px;
 }
 
 .task-list {
-    position: sticky; height: 500px; overflow: scroll; padding-right: 15px;
+    position: sticky; 
+    height: 500px; 
+    overflow: scroll; 
+    padding-right: 15px;
+    column-gap: 10px;
     /* position: -webkit-sticky;
     position: sticky;
     top:0; */
@@ -175,13 +241,13 @@ padding-top: 15px;
 
   
 
-.home{    flex-grow: 3;}
+/* .home{    flex-grow: 3;}
 .positions{    flex-grow: 3;}
 .graphs{    flex-grow: 6;}
 .position-view{    flex-grow: 6;}
 .stage-view{    flex-grow: 6;}
 .note-view{    flex-grow: 6;}
-.tasks{  flex-grow: 1; width: 250px; }
+.tasks{  flex-grow: 1; width: 250px; } */
 
 /* .home { grid-area: 1 / 1 / 2 / 2; height: 100px;}
 .positions { grid-area: 2 / 1 / 6 / 2; }
