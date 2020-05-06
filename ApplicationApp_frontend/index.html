@@ -2,11 +2,12 @@
 <html lang="en" dir="ltr">
     <head>
         <link rel="stylesheet" href="styles.css">
-        <script defer src="assets/index.js"></script>
-        <script defer src="assets/tasks.js"></script>
-        <script defer src="assets/notes.js"></script>
-        <script defer src="assets/stages.js"></script>
-        <script defer src="assets/stretchy.js" async></script>
+        <script defer src="src/index.js"></script>
+        <script defer src="src/tasks.js"></script>
+        <script defer src="src/notes.js"></script>
+        <script defer src="src/stages.js"></script>
+        <script defer src="src/cssStuff.js" ></script>
+
     </head>
 
 <body>
@@ -16,26 +17,29 @@
     </div>
     
     <div class="row2">
-        <div class="positions"> Position Menu 
-            <div>
-                <ul id="positions-ul"> </ul>   
-            </div>
+        <div class="positions"> 
+            <h3>Position Menu</h3>
+            <button type="button" class="collapsible">Positions Menu</button>
+            <div id="positions-div" class="content"> </div>   
         </div>
-        <div class="position-view"> Position View </div>
+        <div class="position-view"> </div>
         <div class="tasks"> 
-            <div id="task-list-title">Task List </div>
-            <div class="task-form"> 
-
+            
+            <div id="myTasksSidepanel" class="tasksSidepanel">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeTaskNav()">&times;</a>
+                <div class="task-form"></div>
+                <div id="task-list-title">Task List </div>
+                
+                <div class="task-list"></div>
             </div>
-            <div class="task-list">
-
-            </div>
+            <button class="openbtn" onclick="openTaskNav()">&#9776;Tasks</button>
+            
         </div>
     </div>
     <div class="row3">
-        <div class="row-task-column">Notes & Tasks</div>
+        <!-- <div class="row-task-column">Notes & Tasks</div> -->
 
-        <div class="stage-view"> Stage View 
+        <div class="stage-view"> Stages 
             <div class="scrolling-wrapper"> 
             
             </div>

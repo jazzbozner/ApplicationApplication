@@ -1,29 +1,171 @@
+#positions-div p{
+    padding-left: 15px;
+}
+.positions{
+    padding-left: 30px;
+}
+/* positions collapsible menu */
+/* Style the button that is used to open and close the collapsible content */
+.collapsible {
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 60%;
+    height: 50%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+  }
+  
+  /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+  .active, .collapsible:hover {
+    background-color: #ccc;
+  }
+  
+  /* Style the collapsible content. Note: hidden by default */
+  /* .content {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    width: 50%;
+  } */
+
+
+  .content {
+    padding: 0 18px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+  }
+
+
+
+  .collapsible:after {
+    content: '\02795'; /* Unicode character for "plus" sign (+) */
+    font-size: 13px;
+    color: white;
+    float: right;
+    margin-left: 5px;
+  }
+  
+  .active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+  }
+
+
+
+
+/* tasks sidebar menu  */
+
+/* The sidepanel menu */
+.tasksSidepanel {
+    height: 350px; /* Specify a height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 0; /* Stay on top */
+    top: 70;
+    right: 0;
+    /* display: block; */
+    padding-right: none;
+    background-color: whitesmoke; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 60px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidepanel */
+  }
+  
+  /* The sidepanel links */
+  .tasksSidepanel div li {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+  }
+  
+  /* When you mouse over the navigation links, change their color */
+  .tasksSidepanel div li:hover {
+    color: #f1f1f1;
+  }
+  
+  /* Position and style the close button (top right corner) */
+  .tasksSidepanel .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    color: black;
+  }
+  
+  /* Style the button that is used to open the sidepanel */
+  .openbtn {
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #111;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+  }
+  
+  .openbtn:hover {
+    background-color: #444;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .parent {
     display: flex;
-    align-items: flex-start;
-    /* grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px; */
-
-    
+    align-items: flex-start;    
 }
+
+.parent h2{
+    padding-left: 30px;
+}
+
+
 
 .row2{
     display: flex;
-    align-items: flex-start;
+    align-items: center;
 }
-
+/*  allows for stages menu to be centered
 .row3{
     display: inline-block;
     flex-shrink: 0;
     align-items: flex-start;
 }
-
+ */
 .row4{
     display: flex;
     align-items: center;
-}
+} 
 
 .note-card{
     padding-right: 100px;
@@ -53,28 +195,18 @@
     overflow-wrap: break-word;
 }
    
-/* .scrolling-wrapper {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-  
-    
+.row3{
+    text-align: center;
+}
+.stage-view{
+    text-align: center;
+    padding-top: 60px;
 }
 
-.card {
-    display: inline-block;
-  } */
+/* horizontal scrolling menu */
 
-/* .scrolling-wrapper{
-display: flex;
-flex-wrap: nowrap;
-overflow-x: auto;
-background-color: cadetblue;
-
-} */
-
-
-div.scrolling-wrapper {
+.scrolling-wrapper {
+    text-align: center;
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -84,16 +216,19 @@ div.scrolling-wrapper {
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
+    position: relative;
 
 }
 
-.scrolling-wrapper > div {
+.scrolling-wrapper div {
     display: inline-block;
     color: white;
     text-align: center;
     padding: 14px;
     text-decoration: none;
     flex: auto;
+    outline-style: inset;
+    column-gap: 400px;
 
     /* pointer-events: none; */
     /* flex: 0 0 auto; */
@@ -117,28 +252,15 @@ padding-top: 15px;
 
 } 
 
+#addStageCard{
+    color: aquamarine;
+}
 
+#addStageCard :hover{
+    background-color: blueviolet;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*  */
 
 
 
@@ -167,7 +289,7 @@ padding-top: 15px;
 }
 
 .task-list {
-    position: sticky; height: 500px; overflow: scroll; padding-right: 15px;
+    position: sticky; height: 500px; padding-right: 15px;
     /* position: -webkit-sticky;
     position: sticky;
     top:0; */
@@ -183,21 +305,3 @@ padding-top: 15px;
 .note-view{    flex-grow: 6;}
 .tasks{  flex-grow: 1; width: 250px; }
 
-/* .home { grid-area: 1 / 1 / 2 / 2; height: 100px;}
-.positions { grid-area: 2 / 1 / 6 / 2; }
-.graphs { grid-area: 1 / 2 / 2 / 5; height: 100px;}
-.position-view { grid-area: 2 / 2 / 4 / 5; }
-.stage-view { grid-area: 4 / 2 / 5 / 5; }
-.note-view { grid-area: 5 / 2 / 6 / 5; }
-.tasks { grid-area: 2 / 5 / 6 / 6; } */
-
-
-
-/* 
-    .home { grid-area: 1 / 1 / 2 / 2; background-color: greenyellow;}
-    .positions { grid-area: 2 / 1 / 5 / 2; background-color: mediumspringgreen;}
-    .graphs { grid-area: 1 / 2 / 2 / 3; background-color: turquoise;}
-    .position-view { grid-area: 2 / 2 / 4 / 5; background-color: cyan;}
-    .stage-view { grid-area: 3 / 2 / 4 / 3; background-color: mediumspringgreen;}
-    .note-view { grid-area: 4 / 2 / 5 / 3; background-color:lightgreen;}
-    .tasks { grid-area: 1 / 3 / 5 / 4; background-color: chartreuse;} */

@@ -12,9 +12,8 @@ const noteView = document.body.querySelector(".note-view")
 const tasks = document.body.querySelector(".tasks")
 
 const userId = 1
-const posMenuUl = document.getElementById("positions-ul")
+const posMenuDiv = document.getElementById("positions-div")
 const stageUl = document.getElementById('stage-list')
-
 
 
 // Biggest Note: everything is contingent on being able to access the User's Id. Figure out how this will be passed along.
@@ -99,8 +98,9 @@ function buildStagesBar(position){
         scrollingWrapper.append(stageDiv)
     })
     let addStage = document.createElement("div")
+    addStage.id = "addStageCard"
     addStage.classList.add("stage-card")
-    addStage.innerHTML = "Add Next Stage"
+    addStage.innerHTML = `<h2>Add Next Stage</h2>`
     addStage.onclick = () => stageForm(position,"new")
     // console.log("bring me the form for a new stage")
     scrollingWrapper.appendChild(addStage)
@@ -114,35 +114,31 @@ function buildStagesBar(position){
 
 function buildLeftColumn(user){
     userLink.innerHTML = ""
-    posMenuUl.innerHTML = ""
+    posMenuDiv.innerHTML = ""
     let userName = document.createElement("h2")
     userName.innerText = user.username
     userLink.id = user.id 
-    // have a link for usrname
-    // userName.onclick = ()=> openUser(user)
     
     user.positions.forEach(position => {
-        buildPosLi(position)
+        buildPosP(position)
     })
     
-    // let newPosBtn = document.createElement("button")
-    // newPosBtn.innerText = "+"
-    // newPosBtn.onclick = () => posForm()
-    // posMenu.prepend(newPosBtn)
-    
+    let newPosBtn = buttonBuilders()
+    posMenuDiv.appendChild(newPosBtn)
     userLink.appendChild(userName)
     
 }
 
 function buildPosView(position){
+    
     posView.innerHTML = ""
 
     
     let title = document.createElement("h1")
-    let company = document.createElement("h2")
+    let company = document.createElement("h3")
     let contact = document.createElement("h3")
     let details = document.createElement("p")
-    let dates = document.createElement("h4")
+    let dates = document.createElement("p")
     let procon = document.createElement("p")
     let rating = document.createElement("p")
     let requirements = document.createElement("p")
@@ -155,6 +151,7 @@ function buildPosView(position){
     let midDiv = document.createElement("div")
     midDiv.id = "pos-details"
     let expBtn = document.createElement("button")
+    expBtn.classList.add("button")
     expBtn.innerText = "EXPAND"
     expBtn.onclick = ()=> showDetails()
     midDiv.setAttribute("hidden", true)
@@ -174,12 +171,14 @@ function buildPosView(position){
     status.innerText = `Status: ${position.status}` 
 
     editBtn.innerText = "Edit Position"
+    editBtn.classList.add("button")
     editBtn.onclick = ()=> posForm(position)
 
     deleteBtn.innerText = "Delete Position"
+    deleteBtn.classList.add("button")
     deleteBtn.onclick = ()=> deletePos(position)
-    midDiv.append(contact, website, rating, procon, requirements, details)
-    posView.append(company, title, salary, dates, status, expBtn, editBtn, deleteBtn, midDiv)
+    midDiv.append( dates, contact, website, rating, procon, requirements, details)
+    posView.append(title, company, salary, status, expBtn, editBtn, deleteBtn, midDiv)
 
     // addStageBtn.innerText = 'Add Stage'
     // addStageBtn.onclick = ()=> stageForm(position)
@@ -465,9 +464,12 @@ function handlePosSubmit(position=""){
 function buttonBuilders(){
     // position form
     let newPosBtn = document.createElement("button")
-    newPosBtn.innerText = "+"
-    posMenu.before(newPosBtn);
+    newPosBtn.id = "new-position-button"
+    newPosBtn.classList.add("button")
+    newPosBtn.innerText = "+ Position"
+    // posMenu.appendChild(newPosBtn);
     newPosBtn.onclick = () => posForm()
+    return newPosBtn
 }
 
 // callbacks
@@ -477,45 +479,33 @@ function showDetails(){
 }
 
 
-function buildPosLi(position){
-    let li = document.createElement("li")
-        li.onclick = ()=> {
+function buildPosP(position){
+    
+    let p = document.createElement("p")
+        p.onclick = ()=> {
             buildPosView(position)
             fetchPosition(position.id)
+            collapsePositionMenu()
         } 
         // li.onclick = ()=> buildPosView(position); //include buildStageLIst(position) function to populate position areas on position click and first/last stage area on position click 
-        li.innerText = position.title
-        li.setAttribute('data-pos-id', `${position.id}`)
+        p.innerText = position.title
+        p.setAttribute('data-pos-id', `${position.id}`)
         // have a link for positions
-        posMenuUl.appendChild(li)
+        posMenuDiv.appendChild(p)
 }
 
 function cancelAction(position){
     position === "" ? posView.innerHTML = "" : buildPosView(position)
-  
-    // if position === "" set to blank div --> eventually set to splash page!
-}
+  }
 
-// frontend dynamics
 
 
 // invoke functions
 buttonBuilders()
 fetchAll(userId)
-// function() {
-//     function scrollHorizontally(e) {
-//         e = window.event || e;
-//         const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-//         document.getElementById('scrolling-wrapper').scrollLeft -= (delta*40); // Multiplied by 40
-//         e.preventDefault();
-//     }
-//     if (document.getElementById('scrolling-wrapper').addEventListener) {
-//         // IE9, Chrome, Safari, Opera
-//         document.getElementById('scrolling-wrapper').addEventListener("mousewheel", scrollHorizontally, false);
-//         // Firefox
-//         document.getElementById('scrolling-wrapper').addEventListener("DOMMouseScroll", scrollHorizontally, false);
-//     } else {
-//         // IE 6/7/8
-//         document.getElementById('scrolling-wrapper').attachEvent("onmousewheel", scrollHorizontally);
-//     }
-// };
+
+
+// some epigraph ideas
+// https://www.pinterest.com/pin/30610472451642536/
+// https://www.pinterest.com/pin/30610472451675177/
+// https://www.pinterest.com/pin/30610472451678453/
