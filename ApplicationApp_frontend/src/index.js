@@ -216,8 +216,9 @@ function posForm(position=""){
         >
         <br >
         <input
-            type="text"
+            type="number"
             name="salary"
+            step='1000'
             value=""
             placeholder="Salary"
             class="input-text"
