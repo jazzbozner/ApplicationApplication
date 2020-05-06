@@ -1,5 +1,4 @@
-const notesContainerDiv = document.getElementById("notes-container")
-const notesView = document.body.querySelector(".note-view")
+
 
 // full crud is there, still need to fill out the openNote function, to render the note onto the main stage area of the page
 // also need to add a cancel button
@@ -87,7 +86,8 @@ function buildNoteForm(note="", stage=""){
 
     let formDiv = document.createElement("div")
     if (note === ""){
-        formDiv.innerHTML = `<form id="note-form">
+        formDiv.innerHTML = `
+        <form id="note-form">
         <h3>Add a New Note</h3>
         <input
           type="text"
@@ -113,7 +113,8 @@ function buildNoteForm(note="", stage=""){
         />
       </form>`
     } else {
-        formDiv.innerHTML = `<form id="note-form">
+        formDiv.innerHTML = `
+        <form id="note-form">
         <h3>Edit Note</h3>
         <input
           type="text"

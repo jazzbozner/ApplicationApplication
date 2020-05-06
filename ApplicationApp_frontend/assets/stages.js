@@ -1,14 +1,3 @@
-//  // click position -->
-// // popliate the stage view with all the stages that have occured. 
-// // add button to stage area where stage can be added
-// // fill out form for stage
-
-// // replace position view with stage
-
-const STAGE = document.body.querySelector('.stage')
-
-// const POSITION_URL = "http://localhost:3000/positions"
-
 // // builders
 
 function buildStageShow(stage) {
@@ -37,15 +26,6 @@ function buildStageShow(stage) {
     div.append(title, status, startDate, endDate, editBtn, deleteBtn)
     STAGE.appendChild(div)
 }
-
-// // function buildStageList(stage) {
-// //     const li = document.createElement('li')
-
-// //     li.innerText = stage.title
-// //     li.onclick = () => buildStageShow(stage);
-
-// //     stageUl.appendChild(li)
-// // }
 
 function stageForm(object, condition="") { //<--- position will go in the argument whenthe stage button is moved.
     if (condition === "new") {
@@ -119,11 +99,6 @@ function stageForm(object, condition="") { //<--- position will go in the argume
 
 // // handler
 
-// function handleEdit(stage) {
-
-
-// }
-
 function handleDeleteStage(stage) {
     console.log(stage)
     
@@ -163,8 +138,6 @@ function handleStageSubmit(object, condition="") {
     }
 }
 
-
-
 // // fetches
 
 function submitStage(stageObj, method = '') {
@@ -186,25 +159,3 @@ function submitStage(stageObj, method = '') {
         fetchPosition(posId)
     }) // need to add new stage to stage list
 }
-
-
-// same functions in index.js file
-// function fetchPosition(positionID) {
-//     fetch(`${POSITION_URL}/${positionID}`)
-//     .then(res => res.json())
-//     // .then(position => {
-//     //     position.stages.forEach(stage => {
-//     //         buildStageList(stage)
-//     //     })
-//     // })
-// }
-
-// // function fetchStage(positionID){
-// //     fetch(`${STAGE_URL}/${positionID}`)
-// //     .then(res => res.json())
-// //     .then(stage => buildStageShow(stage))
-// // }
-
-
-// // fetchPosition(positionID)
-// // fetchStage(positionID)
