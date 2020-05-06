@@ -205,6 +205,7 @@ function posForm(position=""){
           value=""
           placeholder="Job Title"
           class="input-text"
+          required
         >
         <br >
         <input
@@ -213,12 +214,17 @@ function posForm(position=""){
           value=""
           placeholder="Company Name"
           class="input-text"
+          required
         >
         <br >
         <input
             type="number"
             name="salary"
+<<<<<<< HEAD
             step='1000'
+=======
+            step="1000"
+>>>>>>> master
             value=""
             placeholder="Salary"
             class="input-text"
@@ -246,20 +252,23 @@ function posForm(position=""){
             value=""
             placeholder="Requirements"
             class="new-input-text-scrollable"
-        >
+        >Requirements
         </textarea>
         <br >
-        <input
-            type="date"
-            name="postdate"
-            value=""
-            placeholder="Date Posted"
-            class="input-text"
-        >
         <label name="postdate"> 
             Date Posted
         </label>
+        <input
+            type="date"
+            name="postdate"
+            placeholder="Date Posted"
+            value=""
+            class="input-text"
+        >
         <br >
+        <label name="closingdate"> 
+            Closing Date
+        </label>
         <input
             type="date"
             name="closingdate"
@@ -267,17 +276,13 @@ function posForm(position=""){
             placeholder="Closing Date"
             class="input-text"
         >
-        <label name="closingdate"> 
-            Closing Date
-        </label>
         <br >
-        <input
-            type="text"
-            name="rating"
-            value=""
-            placeholder="Rating"
-            class="input-text"
-        >
+        Rating:
+        <select name="rating">
+            <option value="1">Awesome</option>
+            <option value="2">It's Ok</option>
+            <option value="3">Better than Nothing</option>
+        </select>
         <br >
         <textarea
             type="text"
@@ -285,16 +290,16 @@ function posForm(position=""){
             value=""
             placeholder="Pros/Cons:"
             class="new-input-text-scrollable"
-        >
+        >Pros & Cons
         </textarea>
         <br >
-        <input
-            type="text"
-            name="status"
-            value=""
-            placeholder="Application Status:"
-            class="input-text"
-        >
+        Status:
+        <select name="status">
+            <option value="not started">Not Started</option>
+            <option value="in progress">In Progress</option>
+            <option value="accepted">Accepted</option>
+            <option value="rejected">Rejected</option>
+        </select>
         <br >
         <textarea
             id="pos-desc-input-txt" 
@@ -305,7 +310,8 @@ function posForm(position=""){
             value=""
             placeholder="Details"
             class="new-input-text-scrollable"
-        >
+            required
+        >Description
         </textarea>
         <br >
         <input
@@ -329,6 +335,7 @@ function posForm(position=""){
           value="${position.title}"
           placeholder="Job Title"
           class="input-text"
+          required
         >
         <br >
         <label name="company">Company</label>
@@ -339,6 +346,7 @@ function posForm(position=""){
           value="${position.company}"
           placeholder="Company Name"
           class="input-text"
+          required
         >
         <br >
         <label name="salary">
@@ -346,8 +354,9 @@ function posForm(position=""){
         </label>
         <br >
         <input
-            type="text"
+            type="number"
             name="salary"
+            step="1000"
             value="${position.salary}"
             placeholder="Salary"
             class="input-text"
@@ -418,13 +427,11 @@ function posForm(position=""){
             Rating
         </label>
         <br >
-        <input
-            type="text"
-            name="rating"
-            value="${position.rating}"
-            placeholder="Rating"
-            class="input-text"
-        >
+        <select name="rating">
+            <option value="1">Awesome</option>
+            <option value="2">It's Ok</option>
+            <option value="3">Better than Nothing</option>
+        </select>
         <br >
         <label name="procon">
             Pros/Cons
@@ -444,13 +451,12 @@ function posForm(position=""){
             Application Status
         </label>
         <br >
-        <input
-            type="text"
-            name="status"
-            value="${position.status}"
-            placeholder="Application Status:"
-            class="input-text"
-        >
+        <select name="status">
+            <option value="not started">Not Started</option>
+            <option value="in progress">In Progress</option>
+            <option value="accepted">Accepted</option>
+            <option value="rejected">Rejected</option>
+        </select>
         <br >
         <label name="details">
             Details
@@ -474,6 +480,15 @@ function posForm(position=""){
         >
       </form>`
     }
+
+        // <input
+        //     type="text"
+        //     name="rating"
+        //     value="${position.rating}"
+        //     placeholder="Rating"
+        //     class="input-text"
+        // />
+
     // ---> switch back to input --> set a standard width and height -> if they go beyond the size have an overflow scroll property .
 
     // // fetch the former form and repopulate it
@@ -517,7 +532,7 @@ function buttonBuilders(){
     // position form
     let newPosBtn = document.createElement("button")
     newPosBtn.innerText = "+"
-    posMenu.before(newPosBtn);
+    posMenu.prepend(newPosBtn)
     newPosBtn.onclick = () => posForm()
 }
 
