@@ -4,6 +4,7 @@ class StagesSerializer < ActiveModel::Serializer
   belongs_to :position 
 
   has_many :notes
+  has_many :tasks
 end
 
 
