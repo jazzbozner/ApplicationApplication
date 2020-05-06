@@ -203,6 +203,7 @@ function posForm(position=""){
           value=""
           placeholder="Job Title"
           class="input-text"
+          required
         />
         <br />
         <input
@@ -211,10 +212,11 @@ function posForm(position=""){
           value=""
           placeholder="Company Name"
           class="input-text"
+          required
         />
         <br />
         <input
-        type="text"
+        type="number"
         name="salary"
         value=""
         placeholder="Salary"
@@ -245,31 +247,26 @@ function posForm(position=""){
         class="new-input-text-scrollable"
         /></textarea>
         <br />
+        <label name="postdate">Date Posted</label>
         <input
             type="date"
             name="postdate"
-            value=""
             placeholder="Date Posted"
+            value=""
             class="input-text"
         />
-        <label name="postdate">Date Posted</label>
         <br />
+        <label name="closingdate">Closing Date</label>
         <input
         type="date"
+        placeholder="Closing Date"
         name="closingdate"
         value=""
-        placeholder="Closing Date"
         class="input-text"
         />
-        <label name="closingdate">Closing Date</label>
         <br />
-        <input
-            type="text"
-            name="rating"
-            value=""
-            placeholder="Rating"
-            class="input-text"
-        />
+        <label name="rating">Rate this job </label>
+        <select name="rating"><option value="1">Awesome</option><option value="2">Ok</option><option value="3">Better than nothing</option></select>
         <br />
         <textarea
         type="text"
@@ -279,13 +276,13 @@ function posForm(position=""){
         class="new-input-text-scrollable"
         /></textarea>
         <br />
-        <input
-        type="text"
-        name="status"
-        value=""
-        placeholder="Application Status:"
-        class="input-text"
-        />
+        <label name="status">Application Status </label>
+        <select label="Application Status:" name="status" required>
+            <option value="not started">Not Started</option>
+            <option value="in progress">In Progress</option>
+            <option value="accepted">Position Accepted</option>
+            <option value="rejected">Position Rejected</option>
+        </select>
         <br />
         <br />
         <textarea
@@ -333,7 +330,7 @@ function posForm(position=""){
         <label name="salary">Salary</label>
         <br />
         <input
-        type="text"
+        type="number"
         name="salary"
         value="${position.salary}"
         placeholder="Salary"
@@ -390,14 +387,7 @@ function posForm(position=""){
         />
         <br />
         <label name="rating">Rating</label>
-        <br />
-        <input
-            type="text"
-            name="rating"
-            value="${position.rating}"
-            placeholder="Rating"
-            class="input-text"
-        />
+        <select name="rating" value=${position.rating}><option value="1">Awesome</option><option value="2">Ok</option><option value="3">Better than nothing</option></select>
         <br />
         <label name="procon">Pros/Cons</label>
         <br />
@@ -411,13 +401,12 @@ function posForm(position=""){
         <br />
         <label name="status">Application Status</label>
         <br />
-        <input
-        type="text"
-        name="status"
-        value="${position.status}"
-        placeholder="Application Status:"
-        class="input-text"
-        />
+        <select label="Application Status:" name="status" value="${position.status}" required>
+            <option value="not started">Not Started</option>
+            <option value="in progress">In Progress</option>
+            <option value="accepted">Position Accepted</option>
+            <option value="rejected">Position Rejected</option>
+        </select>
         <br />
         <label name="details">Details</label>
         <br />
@@ -437,6 +426,15 @@ function posForm(position=""){
         />
       </form>`
     }
+
+        // <input
+        //     type="text"
+        //     name="rating"
+        //     value="${position.rating}"
+        //     placeholder="Rating"
+        //     class="input-text"
+        // />
+
     // ---> switch back to input --> set a standard width and height -> if they go beyond the size have an overflow scroll property .
 
     // // fetch the former form and repopulate it
@@ -466,7 +464,7 @@ function buttonBuilders(){
     // position form
     let newPosBtn = document.createElement("button")
     newPosBtn.innerText = "+"
-    posMenu.before(newPosBtn);
+    posMenu.prepend(newPosBtn)
     newPosBtn.onclick = () => posForm()
 }
 

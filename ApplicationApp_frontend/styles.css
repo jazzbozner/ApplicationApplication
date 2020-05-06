@@ -1,29 +1,94 @@
+body{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-image: url("assets/grey_wash_wall.png");
+}
+
 .parent {
     display: flex;
-    align-items: flex-start;
-    /* grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(5, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px; */
-
-    
+    padding: 25px;
 }
 
 .row2{
     display: flex;
-    align-items: flex-start;
+    padding: 25px;
 }
 
 .row3{
-    display: inline-block;
-    flex-shrink: 0;
-    align-items: flex-start;
+    display: flex;
+    padding: 25px;
 }
 
 .row4{
     display: flex;
-    align-items: center;
+    padding: 25px;
+
 }
+
+.home{    
+    display: block;
+    width: 15%;
+    padding-left: 25px;
+    padding-right: 25px;
+    padding-top: 25px;    
+    border-radius: 25px; 
+    border-style: outset;
+    border-color: oldlace;
+    background-image: url("assets/mochaGrunge.png");
+}
+.positions{    
+    display: block;
+    width: 15%;
+    padding: 25px;
+    border-radius: 25px; 
+    border-style: outset;
+    border-color: oldlace;
+    background-image: url("assets/mochaGrunge.png");
+}
+.graphs{    
+    flex-grow: 6;
+    padding: 25px;
+    border-radius: 25px; 
+    border-style: outset;
+    border-color: oldlace;
+    background-image: url("assets/mochaGrunge.png");
+}
+.position-view{    
+    flex-grow: 4;
+    padding: 25px;
+    border-radius: 25px; 
+    border-style: outset;
+    border-color: oldlace;
+    background-image: url("assets/mochaGrunge.png");
+}
+.stage-view{    
+    flex-grow: 4;
+    padding: 25px;
+    border-radius: 25px; 
+    border-style: outset;
+    border-color: oldlace;
+    background-image: url("assets/mochaGrunge.png");
+}
+.note-view{    
+    flex-grow: 4;
+    padding: 25px;
+    border-radius: 25px; 
+    border-style: outset;
+    border-color: oldlace;
+    background-image: url("assets/mochaGrunge.png");
+}
+
+.tasks{  
+    display: block;
+    width: 250px; 
+    padding: 25px; 
+    border-radius: 25px; 
+    border-style: outset;
+    border-color: oldlace;
+    background-image: url("assets/mochaGrunge.png");
+}
+
+
 
 .note-card{
     padding-right: 100px;
@@ -35,6 +100,7 @@
     padding-top: 30px;
     padding-right: 50px;
 }
+
 .edit-input-text-scrollable{
     height: 100px; 
     width: 300px;
@@ -52,27 +118,6 @@
     align-content: left;
     overflow-wrap: break-word;
 }
-   
-/* .scrolling-wrapper {
-    overflow-x: scroll;
-    overflow-y: hidden;
-    white-space: nowrap;
-  
-    
-}
-
-.card {
-    display: inline-block;
-  } */
-
-/* .scrolling-wrapper{
-display: flex;
-flex-wrap: nowrap;
-overflow-x: auto;
-background-color: cadetblue;
-
-} */
-
 
 div.scrolling-wrapper {
     display: flex;
@@ -94,11 +139,6 @@ div.scrolling-wrapper {
     padding: 14px;
     text-decoration: none;
     flex: auto;
-
-    /* pointer-events: none; */
-    /* flex: 0 0 auto; */
-    /* width: 100vw;
-    height: 100vh; */
     margin: 0;
     display: flex;
     justify-content: center;
@@ -118,36 +158,11 @@ padding-top: 15px;
 } 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 .high { background-color: #FF958E}
 .medium {background-color: #FEF9A5;}
 .low { background-color: #C7FFB4;}
 
-#new-task{
+#new-task, #edit-task{
     display: block;
     padding-left: 25px;
     background-color: lightgray;
@@ -160,6 +175,7 @@ padding-top: 15px;
 .edit-button{
     border-radius: 8px;
     background-color: inherit;
+    pointer-events: auto
 }
 .complete-button{
     border-radius: 8px;
@@ -167,37 +183,10 @@ padding-top: 15px;
 }
 
 .task-list {
-    position: sticky; height: 500px; overflow: scroll; padding-right: 15px;
-    /* position: -webkit-sticky;
-    position: sticky;
-    top:0; */
+    position: sticky; height: 500px; width: inherit; overflow: scroll; padding-right: 20px; scrol
 }
 
+#task-toggle-button{
+    background-color: inherit;
+}
   
-
-.home{    flex-grow: 3;}
-.positions{    flex-grow: 3;}
-.graphs{    flex-grow: 6;}
-.position-view{    flex-grow: 6;}
-.stage-view{    flex-grow: 6;}
-.note-view{    flex-grow: 6;}
-.tasks{  flex-grow: 1; width: 250px; }
-
-/* .home { grid-area: 1 / 1 / 2 / 2; height: 100px;}
-.positions { grid-area: 2 / 1 / 6 / 2; }
-.graphs { grid-area: 1 / 2 / 2 / 5; height: 100px;}
-.position-view { grid-area: 2 / 2 / 4 / 5; }
-.stage-view { grid-area: 4 / 2 / 5 / 5; }
-.note-view { grid-area: 5 / 2 / 6 / 5; }
-.tasks { grid-area: 2 / 5 / 6 / 6; } */
-
-
-
-/* 
-    .home { grid-area: 1 / 1 / 2 / 2; background-color: greenyellow;}
-    .positions { grid-area: 2 / 1 / 5 / 2; background-color: mediumspringgreen;}
-    .graphs { grid-area: 1 / 2 / 2 / 3; background-color: turquoise;}
-    .position-view { grid-area: 2 / 2 / 4 / 5; background-color: cyan;}
-    .stage-view { grid-area: 3 / 2 / 4 / 3; background-color: mediumspringgreen;}
-    .note-view { grid-area: 4 / 2 / 5 / 3; background-color:lightgreen;}
-    .tasks { grid-area: 1 / 3 / 5 / 4; background-color: chartreuse;} */
