@@ -33,7 +33,7 @@ class StagesController < ApplicationController
     def destroy 
         
         @stage.destroy
-        render json:"Stage Deleted"
+        # render json:"Stage Deleted"
     end 
 
     private 
