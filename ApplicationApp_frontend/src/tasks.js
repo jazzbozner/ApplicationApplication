@@ -34,25 +34,24 @@ function buildTaskList(stage){
     document.getElementById("task-list-title").innerText = `${stage.title} Tasks`
     taskFormDIV.setAttribute("hidden", true)
 
+    taskFormDIV.innerHTML = ""
+    buildTaskForm()
+
     let tasks = stage.tasks
     taskDIV.id = `stage${stage.id}-tasks`
+
+    taskListUL.innerHTML = ""
+    taskListUL.style = "list-style-type:none"
+    tasks.forEach(task => prependTask(task))
 
     if (!document.getElementById("task-toggle-button")){
         let toggleTaskForm = document.createElement("button")
         toggleTaskForm.id = "task-toggle-button"
         toggleTaskForm.innerText = "+"
-        toggleTaskForm.append("Add Task")
+        // toggleTaskForm.append("Add Task")
         toggleTaskForm.onclick = () => toggleForm()
-        taskDIV.prepend(toggleTaskForm)
+        taskDIV.prepend(toggleTaskForm, "Add Task")
     }
-
-    taskFormDIV.innerHTML = ""
-    buildTaskForm()
-
-    
-    taskListUL.innerHTML = ""
-    taskListUL.style = "list-style-type:none"
-    tasks.forEach(task => prependTask(task))
 
 }
 
@@ -76,6 +75,7 @@ function prependTask(task){
     status.innerHTML = `<i>Status: ${task.status}</i><br>`
     
     editTask.innerText = "\u2610"
+    editTask.title = "Edit"
     editTask.className = "edit-button"
     completeTask.innerText = "\u2611"
     completeTask.className = "complete-button"
@@ -103,10 +103,10 @@ function buildTaskForm(task=""){
         
         cancelButton.type = "reset"
         cancelButton.innerText = "Cancel"
-        taskForm.innerHTML = "<br>Create a New Task:<br><input name='title' placeholder='Task Title'><br> <input name='details' placeholder='Task Details'> <br> " +
-        "Priority: <select name='priority'><option value='3'>Low</option><option value='2'>Medium</option><option value='1'>High</option></select> <br>" +
-        "Status:<select name='status' ><option value='not started'>Not Started</option><option value='in progress'>In Progress</option><option value='completed'>Completed</option></select> <br>" +
-        "Started: <input type='date' name='startdate'> <br> Due: <input type='date' name='duedate'><br>"+
+        taskForm.innerHTML = "<br>Create a New Task:<br><input name='title' placeholder='Task Title' required><br> <input name='details' placeholder='Task Details' required> <br> " +
+        "Priority: <select name='priority' required><option value='3'>Low</option><option value='2'>Medium</option><option value='1'>High</option></select> <br>" +
+        "Status:<select name='status'  required><option value='not started'>Not Started</option><option value='in progress'>In Progress</option><option value='completed'>Completed</option></select> <br>" +
+        "Started: <input type='date' name='startdate' required> <br> Due: <input type='date' name='duedate' required><br>"+
         "<input type='submit' name='submit' value='Add Task' class='submit'/>"
         taskForm.addEventListener('submit', handleSubmitNewTask)
         taskForm.append(cancelButton)
@@ -129,7 +129,7 @@ function buildTaskForm(task=""){
             editForm.innerHTML = ""
             buildTaskForm("")
         })
-        cancelButton.addEventListener('click', buildTaskForm)
+        cancelButton.addEventListener('click', ()=>{taskFormDIV.innerHTML = ""; buildTaskForm("")})
         editForm.appendChild(cancelButton)
     }
 }
