@@ -150,16 +150,145 @@
 }
 
 
-
+/* 
 .row2{
     display: flex;
     align-items: center;
+@import url('https://fonts.googleapis.com/css2?family=Jost&display=swap'); */
+
+body {
+    background-image: url("assets/grey_wash_wall.png");
+    padding: 50px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-family: 'Jost', sans-serif;
+}
+
+.nav {
+    /* border: white; */
+    font-family: 'Jost', sans-serif;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    background-image: url("assets/mochaGrunge.png");
+    border-radius: 20px;
+    align-items: center;
+    border-style: groove;
+}
+
+.nav li {
+    font-weight: 500;
+    font-size: 16px;
+    text-decoration: none;
+}
+
+.nav button {
+    justify-self: right;
+    padding: 5px 20px;
+    border: none;
+    border-radius: 50px;
+}
+
+
+
+
+
+
+
+
+/* modified */
+.parent {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
+    }
+    
+.div1 { 
+    grid-area: 1 / 1 / 6 / 2; 
+    grid-template-columns: 5;
+    background-color:  cadetblue; 
+    overflow-x: hidden; 
+    overflow-x: auto; 
+    text-align:left;
+    column-gap: 15px;
+    row-gap: 15px;
+    background-image: url("assets/mochaGrunge.png");
+    border-radius: 20px;
+    border-style: groove;
+}
+.div2 { 
+    grid-area: 1 / 2 / 3 / 5; 
+    background-color:  rgb(181, 216, 218); 
+    /* overflow-x: hidden;  */
+    overflow-y: auto;
+    column-gap: 5px; 
+    row-gap: 1em;
+    background-image: url("assets/mochaGrunge.png");
+    border-radius: 20px;
+    border-style: groove;
+}
+.div3 { 
+    grid-area: 3 / 2 / 4 / 5;
+    background-color:  rgb(181, 216, 218); 
+    overflow-x: hidden; 
+    overflow-x: auto;
+    column-gap: 5px; 
+    row-gap: 1em;
+    background-image: url("assets/mochaGrunge.png");
+    border-radius: 20px;
+    border-style: groove;
+}
+.div4 { 
+    grid-area: 4 / 2 / 6 / 5;
+    background-color:  rgb(181, 216, 218); 
+    overflow-x: hidden; 
+    overflow-x: auto; 
+    column-gap: 5px;
+    row-gap: 1em;
+    background-image: url("assets/mochaGrunge.png");
+    border-radius: 20px;
+    border-style: groove;
+}
+.div5 { 
+    grid-area: 1 / 5 / 3 / 6;
+    background-color:  rgb(181, 216, 218); 
+    overflow-x: hidden; 
+    overflow-x: auto;
+    column-gap: 5px; 
+    row-gap: 1em;
+    background-image: url("assets/mochaGrunge.png");
+    border-radius: 20px;
+    border-style: groove;
+}
+.div6 { 
+    grid-area: 3 / 5 / 6 / 6;
+    background-color:  rgb(181, 216, 218); 
+    overflow-x: hidden;
+    overflow-x: auto; 
+    column-gap: 5px;
+    row-gap: 1em;
+    background-image: url("assets/mochaGrunge.png");
+    border-radius: 20px;
+    border-style: groove;
+}
+
+/* original */
+/* .parent {
+    display: flex;
+    align-items: flex-start;
+} */
+
+/* .row2{
+    display: flex;
+    padding: 25px;
 }
 /*  allows for stages menu to be centered
 .row3{
-    display: inline-block;
-    flex-shrink: 0;
-    align-items: flex-start;
+    display: flex;
+    padding: 25px;
 }
  */
 .row4{
@@ -169,14 +298,17 @@
 
 .note-card{
     padding-right: 100px;
-    background-color: teal;
+    background-image: url("assets/grey_wash_wall.png");
+    border-radius: 20px;
 }
 
 #note-form{
-    background-color: skyblue;
+    background-image: url("assets/grey_wash_wall.png");
     padding-top: 30px;
     padding-right: 50px;
+    border-radius: 20px;
 }
+
 .edit-input-text-scrollable{
     height: 100px; 
     width: 300px;
@@ -195,13 +327,13 @@
     overflow-wrap: break-word;
 }
    
-.row3{
+/* .row3{
     text-align: center;
 }
 .stage-view{
     text-align: center;
     padding-top: 60px;
-}
+} */
 
 /* horizontal scrolling menu */
 
@@ -212,11 +344,12 @@
     align-items: flex-start;
     flex-wrap: nowrap;
     width: auto;
-    background-color: paleturquoise;
+    background-image: url("assets/grey_wash_wall.png");
     overflow-y: hidden;
     overflow-x: auto;
     white-space: nowrap;
-    position: relative;
+    /* position: relative; */
+    border-radius: 20px;
 
 }
 
@@ -249,6 +382,7 @@ flex-shrink: 1;
 text-align: center;
 padding: 14px;
 padding-top: 15px;
+border-radius: 20px;
 
 } 
 
@@ -256,23 +390,19 @@ padding-top: 15px;
     color: aquamarine;
 }
 
-#addStageCard :hover{
-    background-color: blueviolet;
-}
-
-/*  */
+.high { background-color: #FF958E; border-radius: 20px;}
+.medium {background-color: #FEF9A5;border-radius: 20px;}
+.low { background-color: #C7FFB4;border-radius: 20px;}
 
 
 
 
-.high { background-color: #FF958E}
-.medium {background-color: #FEF9A5;}
-.low { background-color: #C7FFB4;}
 
-#new-task{
+#new-task, #edit-task{
     display: block;
-    padding-left: 25px;
-    background-color: lightgray;
+    padding-bottom: 15px;
+    border-radius: 20px;
+    background-image: url("assets/grey_wash_wall.png");
 }
 
 .delete-button{
@@ -282,6 +412,7 @@ padding-top: 15px;
 .edit-button{
     border-radius: 8px;
     background-color: inherit;
+    pointer-events: auto
 }
 .complete-button{
     border-radius: 8px;
@@ -289,19 +420,42 @@ padding-top: 15px;
 }
 
 .task-list {
-    position: sticky; height: 500px; padding-right: 15px;
+    position: sticky; 
+    height: 500px; 
+    overflow: scroll; 
+    padding: 15px;
+    column-gap: 10px;
+    border-radius: 20px;
+    /* background-image: url("assets/grey_wash_wall.png"); */
     /* position: -webkit-sticky;
     position: sticky;
     top:0; */
 }
 
-  
 
-.home{    flex-grow: 3;}
+/* .home{    flex-grow: 3;}
 .positions{    flex-grow: 3;}
 .graphs{    flex-grow: 6;}
 .position-view{    flex-grow: 6;}
 .stage-view{    flex-grow: 6;}
 .note-view{    flex-grow: 6;}
-.tasks{  flex-grow: 1; width: 250px; }
+.tasks{  flex-grow: 1; width: 250px; } */
 
+/* .home { grid-area: 1 / 1 / 2 / 2; height: 100px;}
+.positions { grid-area: 2 / 1 / 6 / 2; }
+.graphs { grid-area: 1 / 2 / 2 / 5; height: 100px;}
+.position-view { grid-area: 2 / 2 / 4 / 5; }
+.stage-view { grid-area: 4 / 2 / 5 / 5; }
+.note-view { grid-area: 5 / 2 / 6 / 5; }
+.tasks { grid-area: 2 / 5 / 6 / 6; } */
+
+
+
+/* 
+    .home { grid-area: 1 / 1 / 2 / 2; background-color: greenyellow;}
+    .positions { grid-area: 2 / 1 / 5 / 2; background-color: mediumspringgreen;}
+    .graphs { grid-area: 1 / 2 / 2 / 3; background-color: turquoise;}
+    .position-view { grid-area: 2 / 2 / 4 / 5; background-color: cyan;}
+    .stage-view { grid-area: 3 / 2 / 4 / 3; background-color: mediumspringgreen;}
+    .note-view { grid-area: 4 / 2 / 5 / 3; background-color:lightgreen;}
+    .tasks { grid-area: 1 / 3 / 5 / 4; background-color: chartreuse;} */

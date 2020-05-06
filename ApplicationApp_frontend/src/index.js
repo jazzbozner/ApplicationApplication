@@ -1,16 +1,28 @@
-const userLink = document.body.querySelector(".home")
-const posMenu = document.body.querySelector(".positions")
-
-const graphs = document.body.querySelector(".graphs")
-const posView = document.body.querySelector(".position-view")
-
+// Tasks
+const TASK_URL = "http://localhost:3000/tasks"
+const taskDIV = document.querySelector("div.tasks")
+const taskFormDIV = document.querySelector("div.task-form")
+const taskListUL = document.querySelector("div.task-list")
+const tasks = document.body.querySelector(".tasks")
+// Notes
+const NOTE_URL = "http://localhost:3000/notes"
+const notesContainerDiv = document.getElementById("notes-container")
+const notesView = document.body.querySelector(".note-view")
+const noteView = document.body.querySelector(".note-view")
+// stages
+const STAGE_URL = "http://localhost:3000/stages"
+const STAGE = document.body.querySelector('.stage')
 const stageView = document.body.querySelector(".stage-view")
 const scrollingWrapper = document.body.querySelector(".scrolling-wrapper")
-
-const noteView = document.body.querySelector(".note-view")
-
-const tasks = document.body.querySelector(".tasks")
-
+const stageUl = document.getElementById('stage-list')
+//  Positions
+const POSITION_URL = "http://localhost:3000/positions"
+const userLink = document.body.querySelector(".home")
+const posMenu = document.body.querySelector(".positions")
+// const posMenuUl = document.getElementById("positions-ul")
+const posView = document.body.querySelector(".position-view")
+// user id
+const USER_URL = "http://localhost:3000/users"
 const userId = 1
 const posMenuDiv = document.getElementById("positions-div")
 const stageUl = document.getElementById('stage-list')
@@ -23,14 +35,15 @@ const stageUl = document.getElementById('stage-list')
 // fetches 
 
 function fetchAll(userId){
-    fetch(`http://localhost:3000/users/${userId}`)
+    debugger
+    fetch(`${USER_URL}/${userId}`)
     .then(resp => resp.json())
     .then(user => buildLeftColumn(user))
-    
+
 }
 
 function fetchPosition(posId){
-    fetch(`http://localhost:3000/positions/${posId}`)
+    fetch(`${POSITION_URL}/${posId}`)
     .then(resp => resp.json())
     .then(position => buildStagesBar(position))
     
@@ -38,24 +51,24 @@ function fetchPosition(posId){
 
 function deletePos(position){
     debugger
-    fetch(`http://localhost:3000/positions/${position.id}`,{
+    fetch(`${POSITION_URL}/${position.id}`,{
         method: "DELETE",
         headers: {
             "Content-Type": "application/json",
             accept: "application/json"
         }
     })
-    .then(()=> {
+    .then(() => {
         fetchAll(userId)
-        posForm()
+        // posForm() Add splash 
     })
 }
 
 function submitPosition(positionObj, method=""){
     
-    let url = `http://localhost:3000/positions`
+    let url = POSITION_URL
     if (method === "PATCH"){
-        url = `http://localhost:3000/positions/${positionObj.id}`
+        url = `${POSITION_URL}/${positionObj.id}`
     }
     fetch(url, {
         method: method,
@@ -71,7 +84,6 @@ function submitPosition(positionObj, method=""){
         buildPosView(position)
     })
 }
-
 
 // builders: specifically for row 3
 
@@ -108,11 +120,8 @@ function buildStagesBar(position){
 
 }
 
-
-
-
 // builders
-
+// step 1 modifed
 function buildLeftColumn(user){
     userLink.innerHTML = ""
     posMenuDiv.innerHTML = ""
@@ -127,13 +136,18 @@ function buildLeftColumn(user){
     let newPosBtn = buttonBuilders()
     posMenuDiv.appendChild(newPosBtn)
     userLink.appendChild(userName)
+    // let newPosBtn = document.createElement("button")
+    // newPosBtn.innerText = "+"
+    // newPosBtn.onclick = () => posForm()
+    // posMenu.prepend(newPosBtn)
+    
+    // userLink.appendChild(userName)
     
 }
 
 function buildPosView(position){
     
     posView.innerHTML = ""
-
     
     let title = document.createElement("h1")
     let company = document.createElement("h3")
@@ -156,12 +170,11 @@ function buildPosView(position){
     expBtn.innerText = "EXPAND"
     expBtn.onclick = ()=> showDetails()
     midDiv.setAttribute("hidden", true)
-    // let addStageBtn = document.createElement("button")
 
     posView.id = position.id
     company.innerText = position.company
     title.innerText = position.title 
-    dates.innerText = `Posting Date --- Closing Date \n${position.postdate} --- ${position.closingdate}`
+    dates.innerText = `Posting Date - Closing Date \n${position.postdate} - ${position.closingdate}`
     salary.innerText = `Salary: ${position.salary}`
     details.innerText = `Details:\n\n${position.details}` 
     requirements.innerText = `Requirements: ${position.requirements}`
@@ -195,7 +208,8 @@ function posForm(position=""){
     cancelBtn.onclick = ()=> cancelAction(position)
     formDiv.id = "new_position"
     if (position === ""){
-        formDiv.innerHTML = `<form id="position-form">
+        formDiv.innerHTML = `
+        <form id="position-form">
         <h3>Add a New Position</h3>
         <input
           type="text"
@@ -203,240 +217,286 @@ function posForm(position=""){
           value=""
           placeholder="Job Title"
           class="input-text"
-        />
-        <br />
+          required
+        >
+        <br >
         <input
           type="text"
           name="company"
           value=""
           placeholder="Company Name"
           class="input-text"
-        />
-        <br />
+          required
+        >
+        <br >
         <input
-        type="text"
-        name="salary"
-        value=""
-        placeholder="Salary"
-        class="input-text"
-        />
-        <br />
+            type="number"
+            name="salary"
+            step="1000"
+            value=""
+            placeholder="Salary"
+            class="input-text"
+        >
+        <br >
         <input
-        type="text"
-        name="contact"
-        value=""
-        placeholder="Company Contact"
-        class="input-text"
-        />
-        <br />
+            type="text"
+            name="contact"
+            value=""
+            placeholder="Company Contact"
+            class="input-text"
+        >
+        <br >
         <input
-        type="text"
-        name="website"
-        value=""
-        placeholder="Company Website"
-        class="input-text"
-        />
-        <br />
+            type="text"
+            name="website"
+            value=""
+            placeholder="Company Website"
+            class="input-text"
+        >
+        <br >
         <textarea
-        type="text"
-        name="requirements"
-        value=""
-        placeholder="Requirements"
-        class="new-input-text-scrollable"
-        /></textarea>
-        <br />
+            type="text"
+            name="requirements"
+            value=""
+            placeholder="Requirements"
+            class="new-input-text-scrollable"
+        >Requirements
+        </textarea>
+        <br >
+        <label name="postdate"> 
+            Date Posted
+        </label>
         <input
             type="date"
             name="postdate"
-            value=""
             placeholder="Date Posted"
-            class="input-text"
-        />
-        <label name="postdate">Date Posted</label>
-        <br />
-        <input
-        type="date"
-        name="closingdate"
-        value=""
-        placeholder="Closing Date"
-        class="input-text"
-        />
-        <label name="closingdate">Closing Date</label>
-        <br />
-        <input
-            type="text"
-            name="rating"
             value=""
-            placeholder="Rating"
             class="input-text"
-        />
-        <br />
-        <textarea
-        type="text"
-        name="procon"
-        value=""
-        placeholder="Pros/Cons:"
-        class="new-input-text-scrollable"
-        /></textarea>
-        <br />
+        >
+        <br >
+        <label name="closingdate"> 
+            Closing Date
+        </label>
         <input
-        type="text"
-        name="status"
-        value=""
-        placeholder="Application Status:"
-        class="input-text"
-        />
-        <br />
-        <br />
+            type="date"
+            name="closingdate"
+            value=""
+            placeholder="Closing Date"
+            class="input-text"
+        >
+        <br >
+        Rating:
+        <select name="rating">
+            <option value="1">Awesome</option>
+            <option value="2">It's Ok</option>
+            <option value="3">Better than Nothing</option>
+        </select>
+        <br >
         <textarea
-        id="pos-desc-input-txt" 
-        type="text" 
-        font-size:1.3em; 
-        padding:.5em;
-        name="details"
-        value=""
-        placeholder="Details"
-        class="new-input-text-scrollable"
-        ></textarea>
-        <br />
+            type="text"
+            name="procon"
+            value=""
+            placeholder="Pros/Cons:"
+            class="new-input-text-scrollable"
+        >Pros & Cons
+        </textarea>
+        <br >
+        Status:
+        <select name="status">
+            <option value="not started">Not Started</option>
+            <option value="in progress">In Progress</option>
+            <option value="accepted">Accepted</option>
+            <option value="rejected">Rejected</option>
+        </select>
+        <br >
+        <textarea
+            id="pos-desc-input-txt" 
+            type="text" 
+            font-size:1.3em; 
+            padding:.5em;
+            name="details"
+            value=""
+            placeholder="Details"
+            class="new-input-text-scrollable"
+            required
+        >Description
+        </textarea>
+        <br >
         <input
           type="submit"
           name="submit"
           value="Create Position"
           class="submit"
-        />
+        >
       </form>`
     } else {
-        formDiv.innerHTML = `<form id="position-form">
-        <h3>Edit Position</h3>
-        <label name="title">Job Title</label>
-        <br />
+        formDiv.innerHTML = `
+        <form id="position-form">
+            <h3>Edit Position</h3>
+        <label name="title">
+            Job Title
+        </label>
+        <br >
         <input
           type="text"
           name="title"
           value="${position.title}"
           placeholder="Job Title"
           class="input-text"
-        />
-        
-        <br />
+          required
+        >
+        <br >
         <label name="company">Company</label>
-        <br />
+        <br >
         <input
           type="text"
           name="company"
           value="${position.company}"
           placeholder="Company Name"
           class="input-text"
-        />
-        <br />
-        <label name="salary">Salary</label>
-        <br />
+          required
+        >
+        <br >
+        <label name="salary">
+            Salary
+        </label>
+        <br >
         <input
-        type="text"
-        name="salary"
-        value="${position.salary}"
-        placeholder="Salary"
-        class="input-text"
-        />
-        <br />
-        <label name="contact">Company Contact</label>
-        <br />
+            type="number"
+            name="salary"
+            step="1000"
+            value="${position.salary}"
+            placeholder="Salary"
+            class="input-text"
+        >
+        <br >
+        <label name="contact">
+            Company Contact
+            </label>
+        <br >
         <input
-        type="text"
-        name="contact"
-        value="${position.contact}"
-        placeholder="Company Contact"
-        class="input-text"
-        />
-        <br />
-        <label name="website">Company Website</label>
-        <br />
+            type="text"
+            name="contact"
+            value="${position.contact}"
+            placeholder="Company Contact"
+            class="input-text"
+        >
+        <br >
+        <label name="website">
+            Company Website
+        </label>
+        <br >
         <input
-        type="text"
-        name="website"
-        value="${position.website}"
-        placeholder="Company Website"
-        class="input-text"
-        />
-        <br />
-        <label name="requirements">Requirements</label>
-        <br />
+            type="text"
+            name="website"
+            value="${position.website}"
+            placeholder="Company Website"
+            class="input-text"
+        >
+        <br >
+        <label name="requirements">
+            Requirements
+        </label>
+        <br >
         <textarea
-        type="text"
-        name="requirements"
-        placeholder="Requirements"
-        class="edit-input-text-scrollable"
-        />"${position.requirements}"</textarea>
-        <br />
-        <label name="postdate">Date Posted</label>
-        <br />
+            type="text"
+            name="requirements"
+            placeholder="Requirements"
+            class="edit-input-text-scrollable"
+            >
+            "${position.requirements}"
+        </textarea>
+        <br >
+        <label name="postdate">
+            Date Posted
+        </label>
+        <br >
         <input
             type="date"
             name="postdate"
             value="${position.postdate}"
             placeholder="Date Posted"
             class="input-text"
-        />
-        <br />
-        <label name="closingdate">Closing Date</label>
-        <br />
+        >
+        <br >
+        <label name="closingdate">
+            Closing Date
+        </label>
+        <br >
         <input
-        type="date"
-        name="closingdate"
-        value="${position.closingdate}"
-        placeholder="Closing Date"
-        class="input-text"
-        />
-        <br />
-        <label name="rating">Rating</label>
-        <br />
-        <input
-            type="text"
-            name="rating"
-            value="${position.rating}"
-            placeholder="Rating"
+            type="date"
+            name="closingdate"
+            value="${position.closingdate}"
+            placeholder="Closing Date"
             class="input-text"
-        />
-        <br />
-        <label name="procon">Pros/Cons</label>
-        <br />
+        >
+        <br >
+        <label name="rating">
+            Rating
+        </label>
+        <br >
+        <select name="rating">
+            <option value="1">Awesome</option>
+            <option value="2">It's Ok</option>
+            <option value="3">Better than Nothing</option>
+        </select>
+        <br >
+        <label name="procon">
+            Pros/Cons
+        </label>
+        <br >
         <textarea
-        type="text"
-        name="procon"
-        value=
-        placeholder="Pros/Cons:"
-        class="edit-input-text-scrollable"
-        />"${position.procon}"</textarea>
-        <br />
-        <label name="status">Application Status</label>
-        <br />
-        <input
-        type="text"
-        name="status"
-        value="${position.status}"
-        placeholder="Application Status:"
-        class="input-text"
-        />
-        <br />
-        <label name="details">Details</label>
-        <br />
+            type="text"
+            name="procon"
+            value=
+            placeholder="Pros/Cons:"
+            class="edit-input-text-scrollable"
+            >
+            "${position.procon}"
+        </textarea>
+        <br >
+        <label name="status">
+            Application Status
+        </label>
+        <br >
+        <select name="status">
+            <option value="not started">Not Started</option>
+            <option value="in progress">In Progress</option>
+            <option value="accepted">Accepted</option>
+            <option value="rejected">Rejected</option>
+        </select>
+        <br >
+        <label name="details">
+            Details
+        </label>
+        <br >
         <textarea   
-        id="details-input"
-        type="textarea"
-        name="details"
-        placeholder="Details"
-        class="edit-input-text-scrollable"
-        />"${position.details}"</textarea>
-        <br />
+            id="details-input"
+            type="textarea"
+            name="details"
+            placeholder="Details"
+            class="edit-input-text-scrollable"
+            >
+            "${position.details}"
+        </textarea>
+        <br >
         <input
-          type="submit"
-          name="submit"
-          value="Save Edits"
-          class="submit"
-        />
+            type="submit"
+            name="submit"
+            value="Save Edits"
+            class="submit"
+        >
       </form>`
     }
+
+        // <input
+        //     type="text"
+        //     name="rating"
+        //     value="${position.rating}"
+        //     placeholder="Rating"
+        //     class="input-text"
+        // />
+
     // ---> switch back to input --> set a standard width and height -> if they go beyond the size have an overflow scroll property .
 
     // // fetch the former form and repopulate it
@@ -450,8 +510,23 @@ function posForm(position=""){
 
 function handlePosSubmit(position=""){
     event.preventDefault()
+    console.log(position)
     let p = event.target
-    let positionObj = {title: p.title.value, company: p.company.value, requirements: p.requirements.value, details: p.details.value, postdate: p.postdate.value, closingdate: p.closingdate.value, salary: p.salary.value, contact: p.contact.value, website: p.website.value, rating: p.rating.value, procon: p.procon.value, status: p.status.value, user_id: userLink.id}
+    let positionObj = {
+        title: p.title.value,
+        company: p.company.value, 
+        requirements: p.requirements.value, 
+        details: p.details.value, 
+        postdate: p.postdate.value, 
+        closingdate: p.closingdate.value, 
+        salary: p.salary.value, 
+        contact: p.contact.value, 
+        website: p.website.value, 
+        rating: p.rating.value, 
+        procon: p.procon.value, 
+        status: p.status.value, 
+        user_id: userLink.id
+    }
 
     if (position === ""){
         submitPosition(positionObj,"POST")
@@ -459,7 +534,6 @@ function handlePosSubmit(position=""){
         positionObj.id = position.id
         submitPosition(positionObj, "PATCH")
     }
-
 }
 
 function buttonBuilders(){
@@ -497,9 +571,14 @@ function buildPosP(position){
 
 function cancelAction(position){
     position === "" ? posView.innerHTML = "" : buildPosView(position)
-  }
-
-
+  
+    // if position === "" set to blank div --> eventually set to splash page!
+}
+// callbacks
+function showDetails(){
+    let detailDiv = document.querySelector("#pos-details")
+    detailDiv.toggleAttribute("hidden")
+}
 
 // invoke functions
 buttonBuilders()
@@ -510,3 +589,20 @@ fetchAll(userId)
 // https://www.pinterest.com/pin/30610472451642536/
 // https://www.pinterest.com/pin/30610472451675177/
 // https://www.pinterest.com/pin/30610472451678453/
+// function() {
+//     function scrollHorizontally(e) {
+//         e = window.event || e;
+//         const delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
+//         document.getElementById('scrolling-wrapper').scrollLeft -= (delta*40); // Multiplied by 40
+//         e.preventDefault();
+//     }
+//     if (document.getElementById('scrolling-wrapper').addEventListener) {
+//         // IE9, Chrome, Safari, Opera
+//         document.getElementById('scrolling-wrapper').addEventListener("mousewheel", scrollHorizontally, false);
+//         // Firefox
+//         document.getElementById('scrolling-wrapper').addEventListener("DOMMouseScroll", scrollHorizontally, false);
+//     } else {
+//         // IE 6/7/8
+//         document.getElementById('scrolling-wrapper').attachEvent("onmousewheel", scrollHorizontally);
+//     }
+// };

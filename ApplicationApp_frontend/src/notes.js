@@ -1,5 +1,4 @@
-const notesContainerDiv = document.getElementById("notes-container")
-const notesView = document.body.querySelector(".note-view")
+
 
 // full crud is there, still need to fill out the openNote function, to render the note onto the main stage area of the page
 // also need to add a cancel button
@@ -9,18 +8,18 @@ const notesView = document.body.querySelector(".note-view")
 
 function allNotes(stage){
     
-    fetch(`http://localhost:3000/stages/${stage.id}`)
+    fetch(`${STAGE_URL}/${stage.id}`)
     .then(resp => resp.json())
     .then(stage => buildNotes(stage))
 }
 
 function submitNote(note, method=""){
     let stageId = note.stage_id
-    let url = `http://localhost:3000/notes`
+    let url = NOTE_URL
+    debugger
     if (method === "PATCH"){
-        url = `http://localhost:3000/notes/${note.id}`
+        url = `${NOTE_URL}/${note.id}`
     }
-    
     fetch(url,{
         method: method,
         headers: {
@@ -31,13 +30,13 @@ function submitNote(note, method=""){
     .then(resp => resp.json())
     .then(note => {
         let stage = {id: note.stage_id}
-        allNotes(stage)
+        allNotes(stage) //unqexpected end of JSON input
     })
 }
 
 function deleteNote(note){
     
-    let url = `http://localhost:3000/notes/${note.id}`
+    let url = `${NOTE_URL}/${note.id}`
     fetch(url,{
         method: "DELETE",
         headers: {
@@ -87,7 +86,8 @@ function buildNoteForm(note="", stage=""){
 
     let formDiv = document.createElement("div")
     if (note === ""){
-        formDiv.innerHTML = `<form id="note-form">
+        formDiv.innerHTML = `
+        <form id="note-form">
         <h3>Add a New Note</h3>
         <input
           type="text"
@@ -113,7 +113,8 @@ function buildNoteForm(note="", stage=""){
         />
       </form>`
     } else {
-        formDiv.innerHTML = `<form id="note-form">
+        formDiv.innerHTML = `
+        <form id="note-form">
         <h3>Edit Note</h3>
         <input
           type="text"
@@ -165,7 +166,7 @@ function openNote(note){
 // newNoteButton
 function newNoteButtonBuilder(stage){
     notesView.innerHTML = ""
-    notesView.innerText = "Notes"
+    // notesView.innerText = "Notes"
     let newNoteBtn = document.createElement("button")
     newNoteBtn.innerText = "+"
     newNoteBtn.setAttribute("data-stage-id", stage.id)
