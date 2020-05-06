@@ -1,11 +1,3 @@
-// const stageID = 1
- 
-const STAGE_URL = "http://localhost:3000/stages"
-const TASK_URL = "http://localhost:3000/tasks"
-const taskDIV = document.querySelector("div.tasks")
-const taskFormDIV = document.querySelector("div.task-form")
-const taskListUL = document.querySelector("div.task-list")
-
 function fetchStageTasks(stageID){
     return fetch(`${STAGE_URL}/${stageID}`).then(res => res.json())
     .then(stage => buildTaskList(stage))
@@ -140,8 +132,6 @@ function buildTaskForm(task=""){
         cancelButton.addEventListener('click', buildTaskForm)
         editForm.appendChild(cancelButton)
     }
-
-
 }
 
 function handleSubmitNewTask(event){
@@ -183,8 +173,6 @@ function handleEditTask(event){
 
 }
 
-
-
 function handleCompleteTask(){
     console.log("Patch with Complete")
     event.preventDefault()
@@ -217,6 +205,3 @@ function toggleForm(condition = ""){
         taskFormDIV.toggleAttribute("hidden")
     }  
 }
-
-
-// fetchStageTasks(stageID)
