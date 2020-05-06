@@ -87,10 +87,13 @@ function buildStagesBar(position){
        
         let stageDiv = document.createElement("div")
         stageDiv.classList.add("stage-card")
+        stageDiv.id = `stage${stage.id}`
         // stageDiv.innerText = stage.title
         stageDiv.innerHTML = `<br><h2>${stage.title}<h2><br>`
         stageDiv.onclick = ()=> {
             console.log(`${stage.title} button was clicked`)
+            buildStageShow(stage)
+            fetchStageTasks(stage.id)
             allNotes(stage)
         } 
         scrollingWrapper.append(stageDiv)
@@ -98,7 +101,8 @@ function buildStagesBar(position){
     let addStage = document.createElement("div")
     addStage.classList.add("stage-card")
     addStage.innerHTML = "Add Next Stage"
-    addStage.onclick = () => console.log("bring me the form for a new stage")
+    addStage.onclick = () => stageForm(position,"new")
+    // console.log("bring me the form for a new stage")
     scrollingWrapper.appendChild(addStage)
 
 }

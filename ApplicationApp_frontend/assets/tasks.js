@@ -1,5 +1,5 @@
-const stageID = 1
-
+// const stageID = 1
+ 
 const STAGE_URL = "http://localhost:3000/stages"
 const TASK_URL = "http://localhost:3000/tasks"
 const taskDIV = document.querySelector("div.tasks")
@@ -39,18 +39,26 @@ function deleteTask(taskID){
 }
 
 function buildTaskList(stage){
+    document.getElementById("task-list-title").innerText = `${stage.title} Tasks`
     taskFormDIV.setAttribute("hidden", true)
 
     let tasks = stage.tasks
     taskDIV.id = `stage${stage.id}-tasks`
 
-    let toggleTaskForm = document.createElement("button")
-    toggleTaskForm.innerText = "+"
-    toggleTaskForm.onclick = () => toggleForm()
-    taskDIV.prepend(toggleTaskForm)
+    if (!document.getElementById("task-toggle-button")){
+        let toggleTaskForm = document.createElement("button")
+        toggleTaskForm.id = "task-toggle-button"
+        toggleTaskForm.innerText = "+"
+        toggleTaskForm.append("Add Task")
+        toggleTaskForm.onclick = () => toggleForm()
+        taskDIV.prepend(toggleTaskForm)
+    }
 
+    taskFormDIV.innerHTML = ""
     buildTaskForm()
 
+    
+    taskListUL.innerHTML = ""
     taskListUL.style = "list-style-type:none"
     tasks.forEach(task => prependTask(task))
 
@@ -86,8 +94,8 @@ function prependTask(task){
         toggleForm("open")
         switchToEditMode()
     })
-    completeTask.addEventListener("click", handleComplete)
-    deleteTask.addEventListener("click", handleDelete)
+    completeTask.addEventListener("click", handleCompleteTask)
+    deleteTask.addEventListener("click", handleDeleteTask)
 
     li.append(completeTask, editTask, deleteTask, title, details, status)
     taskListUL.prepend(li)
@@ -145,7 +153,7 @@ function handleSubmitNewTask(event){
     let task = {title: formValue.title.value, details:formValue.details.value, priority:formValue.priority.value, 
         status:formValue.status.value, startdate:formValue.startdate.value, duedate:formValue.duedate.value, stage_id: stage_id}
     postTask(task)
-    .then(prependTask(task))
+    .then(data => prependTask(data))
     .then(formValue.reset())
 }
 
@@ -177,18 +185,18 @@ function handleEditTask(event){
 
 
 
-function handleComplete(){
+function handleCompleteTask(){
     console.log("Patch with Complete")
     event.preventDefault()
     
     event.target.parentElement.querySelector("i").innerText="Status: completed"
     const taskID = event.target.parentElement.id.split("-")[1]
     const task = {id: taskID, status: "completed"}
-    debugger
+    
     patchTask(task)
 }
 
-function handleDelete(){
+function handleDeleteTask(){
     console.log("Deleting")
     event.preventDefault()
     const taskID = event.target.parentElement.id.split("-")[1]
@@ -211,4 +219,4 @@ function toggleForm(condition = ""){
 }
 
 
-fetchStageTasks(stageID)
+// fetchStageTasks(stageID)
