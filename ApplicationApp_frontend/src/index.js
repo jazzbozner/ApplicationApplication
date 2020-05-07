@@ -11,21 +11,27 @@ const notesView = document.body.querySelector(".note-view")
 const noteView = document.body.querySelector(".note-view")
 // stages
 const STAGE_URL = "http://localhost:3000/stages"
-const STAGE = document.body.querySelector('.stage')
+const STAGE = document.body.querySelector('.stage-card-view')
 const stageView = document.body.querySelector(".stage-view")
 const scrollingWrapper = document.body.querySelector(".scrolling-wrapper")
 const stageUl = document.getElementById('stage-list')
+const STAGE_TITLE = document.body.querySelector(".div3")
+const STAGE_CARD_VIEW = document.body.querySelector(".stage-card-view")
+
 //  Positions
 const POSITION_URL = "http://localhost:3000/positions"
 const userLink = document.body.querySelector(".home")
 const posMenu = document.body.querySelector(".positions")
-// const posMenuUl = document.getElementById("positions-ul")
+const posMenuUl = document.getElementById("positions-ul")
 const posView = document.body.querySelector(".position-view")
+const posViewBar = document.getElementById("pos-view-bar")
+const posViewMenu = document.getElementById("pos-view-bar-content")
+// .body.querySelector(".pos-content")
 // user id
 const USER_URL = "http://localhost:3000/users"
 const userId = 1
 const posMenuDiv = document.getElementById("positions-div")
-const stageUl = document.getElementById('stage-list')
+// const stageUl = document.getElementById('stage-list')
 
 
 // Biggest Note: everything is contingent on being able to access the User's Id. Figure out how this will be passed along.
@@ -34,8 +40,9 @@ const stageUl = document.getElementById('stage-list')
 // bugs, change cancel button on new form view, also don't let it save.
 // fetches 
 
+// stageView no longer necessary take out
+
 function fetchAll(userId){
-    debugger
     fetch(`${USER_URL}/${userId}`)
     .then(resp => resp.json())
     .then(user => buildLeftColumn(user))
@@ -132,7 +139,12 @@ function buildLeftColumn(user){
     user.positions.forEach(position => {
         buildPosP(position)
     })
-    
+    let title = document.createElement("h3")
+    title.id = "pos-sidebar-header"
+    title.innerText = "Positions"
+    posMenuDiv.prepend(title)
+
+
     let newPosBtn = buttonBuilders()
     posMenuDiv.appendChild(newPosBtn)
     userLink.appendChild(userName)
@@ -147,7 +159,7 @@ function buildLeftColumn(user){
 
 function buildPosView(position){
     
-    posView.innerHTML = ""
+    posViewMenu.innerHTML = ""
     
     let title = document.createElement("h1")
     let company = document.createElement("h3")
@@ -165,13 +177,10 @@ function buildPosView(position){
 
     let midDiv = document.createElement("div")
     midDiv.id = "pos-details"
-    let expBtn = document.createElement("button")
-    expBtn.classList.add("button")
-    expBtn.innerText = "EXPAND"
-    expBtn.onclick = ()=> showDetails()
+
     midDiv.setAttribute("hidden", true)
 
-    posView.id = position.id
+    // posView.id = position.id
     company.innerText = position.company
     title.innerText = position.title 
     dates.innerText = `Posting Date - Closing Date \n${position.postdate} - ${position.closingdate}`
@@ -191,8 +200,12 @@ function buildPosView(position){
     deleteBtn.innerText = "Delete Position"
     deleteBtn.classList.add("button")
     deleteBtn.onclick = ()=> deletePos(position)
+
+    posViewBar.innerText = `Position: ${title.innerText} \n Company:${company.innerText}`
     midDiv.append( dates, contact, website, rating, procon, requirements, details)
-    posView.append(title, company, salary, status, expBtn, editBtn, deleteBtn, midDiv)
+
+    posViewMenu.append(salary, status, editBtn, deleteBtn, dates, contact, website, rating, procon, requirements, details)
+
 
     // addStageBtn.innerText = 'Add Stage'
     // addStageBtn.onclick = ()=> stageForm(position)
@@ -502,8 +515,8 @@ function posForm(position=""){
     // // fetch the former form and repopulate it
     formDiv.appendChild(cancelBtn)
 
-    posView.innerHTML = ""
-    posView.appendChild(formDiv)
+    posViewBar.innerHTML = ""
+    posViewBar.appendChild(formDiv)
     let form = document.getElementById("position-form")
     form.addEventListener("submit", ()=> handlePosSubmit(position))
 }
@@ -538,10 +551,10 @@ function handlePosSubmit(position=""){
 
 function buttonBuilders(){
     // position form
-    let newPosBtn = document.createElement("button")
+    let newPosBtn = document.createElement("p")
     newPosBtn.id = "new-position-button"
-    newPosBtn.classList.add("button")
-    newPosBtn.innerText = "+ Position"
+    newPosBtn.classList.add("new-pos-link")
+    newPosBtn.innerText = "Add a Position"
     // posMenu.appendChild(newPosBtn);
     newPosBtn.onclick = () => posForm()
     return newPosBtn
@@ -560,7 +573,7 @@ function buildPosP(position){
         p.onclick = ()=> {
             buildPosView(position)
             fetchPosition(position.id)
-            collapsePositionMenu()
+            closePosNav()
         } 
         // li.onclick = ()=> buildPosView(position); //include buildStageLIst(position) function to populate position areas on position click and first/last stage area on position click 
         p.innerText = position.title
