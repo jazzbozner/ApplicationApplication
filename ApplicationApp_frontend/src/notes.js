@@ -16,7 +16,7 @@ function allNotes(stage){
 function submitNote(note, method=""){
     let stageId = note.stage_id
     let url = NOTE_URL
-    debugger
+
     if (method === "PATCH"){
         url = `${NOTE_URL}/${note.id}`
     }
@@ -80,9 +80,15 @@ function buildNote(note){
     noteDiv.append(editBtn, deleteBtn)
     notesContainerDiv.appendChild(noteDiv)
 }
+
 function buildNoteForm(note="", stage=""){
 
     // notesContainerDiv.innerHTML = ""
+    notesView.innerHTML = ""
+    
+    let cancelBtn = document.createElement("button")
+    cancelBtn.innerText = "Cancel"
+    cancelBtn.onclick = () => buildNotes(stage)
 
     let formDiv = document.createElement("div")
     if (note === ""){
@@ -95,6 +101,7 @@ function buildNoteForm(note="", stage=""){
           value=""
           placeholder="Note Title"
           class="input-text"
+          required
         />
         <br />
         <textarea
@@ -103,6 +110,7 @@ function buildNoteForm(note="", stage=""){
           value=""
           placeholder="Note Details"
           class="input-text"
+          required
         /></textarea>
         <br />
         <input
@@ -142,6 +150,8 @@ function buildNoteForm(note="", stage=""){
     }
     formDiv.addEventListener("submit", ()=> submitNoteHandler(note, stage))
     notesView.appendChild(formDiv)
+    formDiv.appendChild(cancelBtn)
+
 }
 
 // callbacks 

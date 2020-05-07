@@ -11,18 +11,30 @@ const notesView = document.body.querySelector(".note-view")
 const noteView = document.body.querySelector(".note-view")
 // stages
 const STAGE_URL = "http://localhost:3000/stages"
-const STAGE = document.body.querySelector('.stage')
+const STAGE = document.body.querySelector('.stage-card-view')
 const stageView = document.body.querySelector(".stage-view")
 const scrollingWrapper = document.body.querySelector(".scrolling-wrapper")
 const stageUl = document.getElementById('stage-list')
+const STAGE_TITLE = document.body.querySelector(".div3")
+const STAGE_CARD_VIEW = document.body.querySelector(".stage-card-view")
+
 //  Positions
 const POSITION_URL = "http://localhost:3000/positions"
 const userLink = document.body.querySelector(".home")
 const posMenu = document.body.querySelector(".positions")
-const posMenuUl = document.getElementById("positions-ul")
+// const posMenuUl = document.getElementById("positions-ul")
 const posView = document.body.querySelector(".position-view")
+const posViewBar = document.getElementById("pos-view-bar")
+const posViewMenu = document.getElementById("pos-view-bar-content")
+// .body.querySelector(".pos-content")
 // user id
 const USER_URL = "http://localhost:3000/users"
+
+// pre "accepted change before upstream" --> not necessary
+// const userId = 1
+const posMenuDiv = document.getElementById("positions-div")
+// const stageUl = document.getElementById('stage-list')
+
 
 // const userId = userLink.id
 const parentDiv = document.body.querySelector('.parent')
@@ -34,6 +46,8 @@ const graphs = document.body.querySelector(".graphs")
 // changes: postPosition has become submitPosition and will take in a method as well as a an object of the body key. Will now perform POST or PATCH requests dependent on the method value
 // bugs, change cancel button on new form view, also don't let it save.
 // fetches 
+
+// stageView no longer necessary take out
 
 function fetchAll(userId){
     fetch(`${USER_URL}/${userId}`)
@@ -104,14 +118,16 @@ function buildStagesBar(position){
         stageDiv.onclick = ()=> {
             console.log(`${stage.title} button was clicked`)
             buildStageShow(stage)
+    
             fetchStageTasks(stage.id)
             allNotes(stage)
         } 
         scrollingWrapper.append(stageDiv)
     })
     let addStage = document.createElement("div")
+    addStage.id = "addStageCard"
     addStage.classList.add("stage-card")
-    addStage.innerHTML = "Add Next Stage"
+    addStage.innerHTML = `<h2>Add Next Stage</h2>`
     addStage.onclick = () => stageForm(position,"new")
     // console.log("bring me the form for a new stage")
     scrollingWrapper.appendChild(addStage)
@@ -121,8 +137,15 @@ function buildStagesBar(position){
 // builders
 // step 1 modifed
 function buildLeftColumn(user){
+
+// older 'changes pre upstream'
     // userLink.innerHTML = ""
-    posMenuUl.innerHTML = ""
+    // posMenuDiv.innerHTML = ""
+    // let userName = document.createElement("h2")
+    // userName.innerText = user.username
+    // userLink.id = user.id 
+    // userLink.innerHTML = ""
+    // posMenuUl.innerHTML = ""
     // let userName = document.createElement("h2")
     // userName.innerText = user.username
     // userLink.id = user.id 
@@ -130,9 +153,19 @@ function buildLeftColumn(user){
     // userName.onclick = ()=> openUser(user)
     
     user.positions.forEach(position => {
-        buildPosLi(position)
+        buildPosP(position)
     })
-    
+    let title = document.createElement("h3")
+    title.id = "pos-sidebar-header"
+    title.innerText = "Positions"
+    posMenuDiv.prepend(title)
+
+
+    let newPosBtn = buttonBuilders()
+    posMenuDiv.appendChild(newPosBtn)
+
+    // userLink.appendChild(userName)
+
     // let newPosBtn = document.createElement("button")
     // newPosBtn.innerText = "+"
     // newPosBtn.onclick = () => posForm()
@@ -143,13 +176,14 @@ function buildLeftColumn(user){
 }
 
 function buildPosView(position){
-    posView.innerHTML = ""
+    
+    posViewMenu.innerHTML = ""
     
     let title = document.createElement("h1")
-    let company = document.createElement("h2")
+    let company = document.createElement("h3")
     let contact = document.createElement("h3")
     let details = document.createElement("p")
-    let dates = document.createElement("h4")
+    let dates = document.createElement("p")
     let procon = document.createElement("p")
     let rating = document.createElement("p")
     let requirements = document.createElement("p")
@@ -161,12 +195,10 @@ function buildPosView(position){
 
     let midDiv = document.createElement("div")
     midDiv.id = "pos-details"
-    let expBtn = document.createElement("button")
-    expBtn.innerText = "EXPAND"
-    expBtn.onclick = ()=> showDetails()
+
     midDiv.setAttribute("hidden", true)
 
-    posView.id = position.id
+    // posView.id = position.id
     company.innerText = position.company
     title.innerText = position.title 
     dates.innerText = `Posting Date - Closing Date \n${position.postdate} - ${position.closingdate}`
@@ -180,12 +212,23 @@ function buildPosView(position){
     status.innerText = `Status: ${position.status}` 
 
     editBtn.innerText = "Edit Position"
+    editBtn.classList.add("button")
     editBtn.onclick = ()=> posForm(position)
 
     deleteBtn.innerText = "Delete Position"
+    deleteBtn.classList.add("button")
     deleteBtn.onclick = ()=> deletePos(position)
-    midDiv.append(contact, website, rating, procon, requirements, details)
-    posView.append(company, title, salary, dates, status, expBtn, editBtn, deleteBtn, midDiv)
+
+    posViewBar.innerText = `Position: ${title.innerText} \n Company:${company.innerText}`
+    midDiv.append( dates, contact, website, rating, procon, requirements, details)
+
+    posViewMenu.append(salary, status, editBtn, deleteBtn, dates, contact, website, rating, procon, requirements, details)
+
+
+    // addStageBtn.innerText = 'Add Stage'
+    // addStageBtn.onclick = ()=> stageForm(position)
+
+    // posView.append(company, title, salary, dates, status, contact, website, rating, procon, requirements, details, editBtn, deleteBtn, addStageBtn)
 }
 
 function posForm(position=""){
@@ -490,8 +533,8 @@ function posForm(position=""){
     // // fetch the former form and repopulate it
     formDiv.appendChild(cancelBtn)
 
-    posView.innerHTML = ""
-    posView.appendChild(formDiv)
+    posViewBar.innerHTML = ""
+    posViewBar.appendChild(formDiv)
     let form = document.getElementById("position-form")
     form.addEventListener("submit", ()=> handlePosSubmit(position))
 }
@@ -526,23 +569,35 @@ function handlePosSubmit(position=""){
 
 function buttonBuilders(){
     // position form
-    let newPosBtn = document.createElement("button")
-    newPosBtn.innerText = "+"
-    posMenu.prepend(newPosBtn)
+    let newPosBtn = document.createElement("p")
+    newPosBtn.id = "new-position-button"
+    newPosBtn.classList.add("new-pos-link")
+    newPosBtn.innerText = "Add a Position"
+    // posMenu.appendChild(newPosBtn);
     newPosBtn.onclick = () => posForm()
+    return newPosBtn
 }
 
-function buildPosLi(position){
-    let li = document.createElement("li")
-        li.onclick = ()=> {
+// callbacks
+function showDetails(){
+    let detailDiv = document.querySelector("#pos-details")
+    detailDiv.toggleAttribute("hidden")
+}
+
+
+function buildPosP(position){
+    
+    let p = document.createElement("p")
+        p.onclick = ()=> {
             buildPosView(position)
             fetchPosition(position.id)
+            closePosNav()
         } 
         // li.onclick = ()=> buildPosView(position); //include buildStageLIst(position) function to populate position areas on position click and first/last stage area on position click 
-        li.innerText = position.title
-        li.setAttribute('data-pos-id', `${position.id}`)
+        p.innerText = position.title
+        p.setAttribute('data-pos-id', `${position.id}`)
         // have a link for positions
-        posMenuUl.appendChild(li)
+        posMenuDiv.appendChild(p)
 }
 
 function cancelAction(position){
@@ -560,6 +615,11 @@ function showDetails(){
 // buttonBuilders()
 // fetchAll(userId)
 
+
+// some epigraph ideas
+// https://www.pinterest.com/pin/30610472451642536/
+// https://www.pinterest.com/pin/30610472451675177/
+// https://www.pinterest.com/pin/30610472451678453/
 // function() {
 //     function scrollHorizontally(e) {
 //         e = window.event || e;

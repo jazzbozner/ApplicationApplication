@@ -9,6 +9,8 @@
         <script defer src="src/tasks.js"></script>
         <script defer src="src/notes.js"></script>
         <script defer src="src/stages.js"></script>
+        <script defer src="src/cssStuff.js"></script>
+
         <!-- <script defer src="assets/stretchy.js" async></script> -->
     
         <meta charset="utf-8">
@@ -21,7 +23,7 @@
    
     <header>
         <div class='nav'>
-            <h2>Application: Application</h2>
+            <h2>&nbsp<button class="openbtn" onmouseover="openPosNav()">&#9776; </button>&nbspApplication: Application</h2>
             <nav>
                 <ul class='nav_links'>
                     <li>Inspirational Quote</li>
@@ -32,6 +34,8 @@
                 <div class='login-form-div'></div>
             </div>
         </div>
+        <div class="home"></div>
+
     </header>
 
     <body>
@@ -39,38 +43,56 @@
         <div class='signup'></div>
 
         <div class="parent">
-            <div class="home"></div>
-            <div class="div1"> 
-                <div class="positions">  
-                        <br>
-                        All Positions
-                        <ul id="positions-ul"></ul>   
-                </div>
+            <div class="positions">  
+                <br>                        
+                    <div id="myPosSidepanel" class="posSidepanel"> 
+                        <a href="javascript:void(0)" class="closebtn" onclick="closePosNav()">&times;</a>
+                        <div id="positions-div"></div>
+                    </div>
+                    
             </div>
+            <!-- <div class="div1">  -->
+                <!-- <div class="positions">  
+                        <br>                        
+                            <div id="myPosSidepanel" class="posSidepanel"> 
+                                <a href="javascript:void(0)" class="closebtn" onclick="closePosNav()">&times;</a>
+                                <div id="positions-div"></div>
+                            </div>
+                            
+                </div> -->
+            <!-- </div> -->
             <div class="div2">
-                <div class="position-view"> </div>
+                <!-- <div class="position-view"> </div> -->
+                <div id="pos-view-bar" class="posCollapsibleView"></div>
+                    <div class="posContent" id="pos-view-bar-content"> 
+                    </div>
             </div>
             <div class="div3">
                 <div class="stage-view">
                     <div class="scrolling-wrapper"> </div>
+                    <div class="stage-card-view"></div>
                 </div> 
             </div>
             <div class="div4"> 
                 <br>Notes:
-                <div class="note-view"></div>
+                
                 <div id="notes-container"></div>
+                <div class="note-view"></div>
             </div>
             <div class="div5">
                 <br>
+                <div>Upcoming Tasks</div>
                 <div class="tasks"> 
                     <div id="task-list-title">Task List: </div>
                     <div class="task-form"> </div>
                     <div class="task-list"> </div>
                 </div>
             </div>
-            <div class="div6"> 
+            <!-- <div class="div6"> 
                 <div class="stage"></div>   
-            </div>
+            </div> -->
+            <!-- <button class="openbtn" onclick="openTaskNav()">&#9776;Tasks</button> -->
+            
         </div>
             
             

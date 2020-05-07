@@ -95,6 +95,7 @@ function prependTask(task){
 
 function buildTaskForm(task=""){
 
+    
     if (task == ""){
         const taskForm = document.createElement("form")
         taskForm.id = "new-task"
@@ -108,7 +109,13 @@ function buildTaskForm(task=""){
         "Status:<select name='status'  required><option value='not started'>Not Started</option><option value='in progress'>In Progress</option><option value='completed'>Completed</option></select> <br>" +
         "Started: <input type='date' name='startdate' required> <br> Due: <input type='date' name='duedate' required><br>"+
         "<input type='submit' name='submit' value='Add Task' class='submit'/>"
-        taskForm.addEventListener('submit', handleSubmitNewTask)
+        taskForm.addEventListener('submit', ()=>{
+            toggleForm()
+            handleSubmitNewTask(event)
+        })
+        // debugger
+        // let submitBtn = document.getElementById("new-task").querySelector('input[name="submit"]')
+        // submitBtn.onclick = ()=>toggleForm()
         taskForm.append(cancelButton)
     }
     else{
@@ -125,10 +132,13 @@ function buildTaskForm(task=""){
         `<input type='submit' name='submit' value='Save Edits' class='submit'/>`
         taskFormDIV.append(editForm)
         editForm.addEventListener('submit', () => {
+            toggleForm()
+
             handleEditTask(event)
             editForm.innerHTML = ""
             buildTaskForm("")
         })
+        cancelButton.onclick = console.log("cancellled)")
         cancelButton.addEventListener('click', ()=>{taskFormDIV.innerHTML = ""; buildTaskForm("")})
         editForm.appendChild(cancelButton)
     }

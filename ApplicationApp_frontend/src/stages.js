@@ -1,20 +1,21 @@
 // // builders
 
 function buildStageShow(stage) {
-    STAGE.innerHTML = ''
+    STAGE_CARD_VIEW.innerHTML = ''
     const div = document.createElement('div')
     div.id = `stage-card`
     const title = document.createElement('h3')
     const status = document.createElement('p')
-    const startDate = document.createElement('p')
-    const endDate = document.createElement('p')
+    // const startDate = document.createElement('p')
+    // const endDate = document.createElement('p')
+    const dates = document.createElement('p')
     const editBtn = document.createElement('button')
     const deleteBtn = document.createElement('button')
 
     title.innerText = `Title: ${stage.title}`
     status.innerText = `Status: ${stage.status}`
-    startDate.innerText = `Start date: ${stage.startdate}`
-    endDate.innerText = `End date: ${stage.enddate}`
+    dates.innerText = `Start date: ${stage.startdate} •••• End date: ${stage.enddate}`
+    // endDate.innerText = `End date: ${stage.enddate}`
     editBtn.innerText = 'Edit'
     deleteBtn.innerText ='Delete'
 
@@ -23,8 +24,8 @@ function buildStageShow(stage) {
     // else set values
     deleteBtn.addEventListener('click', ()=> handleDeleteStage(stage))
 
-    div.append(title, status, startDate, endDate, editBtn, deleteBtn)
-    STAGE.appendChild(div)
+    div.append(title, status, dates, editBtn, deleteBtn)
+    STAGE_CARD_VIEW.appendChild(div)
 }
 
 function stageForm(object, condition="") { //<--- position will go in the argument whenthe stage button is moved.
@@ -35,7 +36,7 @@ function stageForm(object, condition="") { //<--- position will go in the argume
         const div = document.createElement('div')
         const form = document.createElement('form')
         const title = document.createElement('input')
-        const status = document.createElement('input')
+        const status = document.createElement('select')
         const startDate = document.createElement('input')
         const endDate = document.createElement('input')
         const submit = document.createElement('button')
@@ -43,7 +44,16 @@ function stageForm(object, condition="") { //<--- position will go in the argume
         div.id = 'new_stage'
         title.type = 'text'
         title.name = 'title'
+        title.required = 'true'
         title.placeholder = 'Title'
+
+        status.innerHTML = `<select name="status">
+        <option value="not started">Not Started</option>
+        <option value="in progress">In Progress</option>
+        <option value="accepted">Accepted</option>
+        <option value="rejected">Rejected</option>
+        </select>`
+
         status.type = 'text'
         status.name = 'status'
         status.placeholder = 'Status'
@@ -66,7 +76,7 @@ function stageForm(object, condition="") { //<--- position will go in the argume
         const div = document.createElement('div')
         const form = document.createElement('form')
         const title = document.createElement('input')
-        const status = document.createElement('input')
+        const status = document.createElement('select')
         const startDate = document.createElement('input')
         const endDate = document.createElement('input')
         const submit = document.createElement('button')
@@ -75,6 +85,14 @@ function stageForm(object, condition="") { //<--- position will go in the argume
         title.type = 'text'
         title.name = 'title'
         title.value = stage.title
+
+        status.innerHTML = `<select name="status">
+        <option value="not started">Not Started</option>
+        <option value="in progress">In Progress</option>
+        <option value="accepted">Accepted</option>
+        <option value="rejected">Rejected</option>
+        </select>`
+        
         status.type = 'text'
         status.name = 'status'
         status.value = stage.status
@@ -157,5 +175,6 @@ function submitStage(stageObj, method = '') {
     .then(stage => {
         let posId = stage.position_id
         fetchPosition(posId)
+        buildStageShow(stage)
     }) // need to add new stage to stage list
 }

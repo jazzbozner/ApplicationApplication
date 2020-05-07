@@ -4,6 +4,9 @@ const userDisplay = document.querySelector('.logged-in-user')
 
 function buildSignUpForm() {
     parentDiv.style.display = 'none'
+    // STAGE_TITLE.setAttribute("hidden", true)
+
+
 
     const brk1 = document.createElement('br')
     const brk2 = document.createElement('br')
@@ -106,7 +109,7 @@ function changePageView(user) {
     const loginForm = document.getElementById('login-form')
     loginForm.remove()
     signupDiv.style.display = 'none'
-    parentDiv.style.display = 'block'
+    parentDiv.style.display = 'grid'
     userDisplay.style.display = 'block'
     userDisplay.innerHTML = `${user.username} <button id='logout-btn'> Logout </button>`
     userLink.id = user.id 
