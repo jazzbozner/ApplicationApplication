@@ -64,6 +64,15 @@ body {
     /* background-image: url("assets/mochaGrunge.png"); */
     /* border-radius: 20px; */
     /* border-style: groove; */
+  
+  /*  */
+    /* background-image: url("assets/mochaGrunge.png");
+    border-radius: 20px;
+    border-style: groove; */
+  
+  
+    /* display: flex; */
+    /* flex-shrink: 1; */
 }
 
 

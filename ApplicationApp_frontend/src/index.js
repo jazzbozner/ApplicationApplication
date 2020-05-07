@@ -29,10 +29,17 @@ const posViewMenu = document.getElementById("pos-view-bar-content")
 // .body.querySelector(".pos-content")
 // user id
 const USER_URL = "http://localhost:3000/users"
-const userId = 1
-const posMenuDiv = document.getElementById("positions-div")
+
+// pre "accepted change before upstream" --> not necessary
+// const userId = 1
+// const posMenuDiv = document.getElementById("positions-div")
 // const stageUl = document.getElementById('stage-list')
 
+
+// const userId = userLink.id
+const parentDiv = document.body.querySelector('.parent')
+// Analytics
+const graphs = document.body.querySelector(".graphs")
 
 // Biggest Note: everything is contingent on being able to access the User's Id. Figure out how this will be passed along.
 // challenges: edit form will only populate specific input fields and sometimes only up to one or two words....
@@ -57,7 +64,6 @@ function fetchPosition(posId){
 }
 
 function deletePos(position){
-    debugger
     fetch(`${POSITION_URL}/${position.id}`,{
         method: "DELETE",
         headers: {
@@ -66,7 +72,7 @@ function deletePos(position){
         }
     })
     .then(() => {
-        fetchAll(userId)
+        fetchAll(userLink.id)
         // posForm() Add splash 
     })
 }
@@ -87,7 +93,7 @@ function submitPosition(positionObj, method=""){
     })
     .then(resp => resp.json())
     .then(position => {
-        fetchAll(userId)
+        fetchAll(userLink.id)
         buildPosView(position)
     })
 }
@@ -130,11 +136,20 @@ function buildStagesBar(position){
 // builders
 // step 1 modifed
 function buildLeftColumn(user){
-    userLink.innerHTML = ""
-    posMenuDiv.innerHTML = ""
-    let userName = document.createElement("h2")
-    userName.innerText = user.username
-    userLink.id = user.id 
+
+// older 'changes pre upstream'
+    // userLink.innerHTML = ""
+    // posMenuDiv.innerHTML = ""
+    // let userName = document.createElement("h2")
+    // userName.innerText = user.username
+    // userLink.id = user.id 
+    // userLink.innerHTML = ""
+    posMenuUl.innerHTML = ""
+    // let userName = document.createElement("h2")
+    // userName.innerText = user.username
+    // userLink.id = user.id 
+    // have a link for usrname
+    // userName.onclick = ()=> openUser(user)
     
     user.positions.forEach(position => {
         buildPosP(position)
@@ -594,8 +609,8 @@ function showDetails(){
 }
 
 // invoke functions
-buttonBuilders()
-fetchAll(userId)
+// buttonBuilders()
+// fetchAll(userId)
 
 
 // some epigraph ideas

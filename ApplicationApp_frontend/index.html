@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="styles.css">
         <link href="https://fonts.googleapis.com/css2?family=Jost&display=swap" rel="stylesheet">
         <script defer src="src/index.js"></script>
+        <script defer src="src/user.js"></script>
         <script defer src="src/tasks.js"></script>
         <script defer src="src/notes.js"></script>
         <script defer src="src/stages.js"></script>
@@ -28,8 +29,10 @@
                     <li>Inspirational Quote</li>
                 </ul>
             </nav>
-            
-            <h3>User Name <br><button>Log Out Button</button></h3>
+            <div class='login'>
+                <h3 class='logged-in-user'>User Name</h3>
+                <div class='login-form-div'></div>
+            </div>
         </div>
         <div class="home"></div>
 
@@ -37,6 +40,8 @@
 
     <body>
 <!-- need to actualy adjust the divs within girds -->
+        <div class='signup'></div>
+
         <div class="parent">
             <div class="div1"> 
                 <div class="positions">  
