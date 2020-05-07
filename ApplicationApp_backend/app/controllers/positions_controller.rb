@@ -2,6 +2,11 @@ class PositionsController < ApplicationController
     before_action :set_position, only: [:show, :update, :destroy]
     # 
 
+    def index 
+        @positions = Position.all
+        render json:@positions
+    end
+
     def show
         render json: @position, include: ['user','stages', 'notes', 'tasks'] 
     end 
@@ -28,7 +33,6 @@ class PositionsController < ApplicationController
     end 
     
     def destroy 
-        byebug
         @position.destroy
         # render json:"Position Deleted"
     end 
