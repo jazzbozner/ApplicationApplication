@@ -72,8 +72,9 @@ function deletePos(position){
         }
     })
     .then(() => {
-        fetchAll(userLink.id)
-        // posForm() Add splash 
+        refreshView()
+        // fetchAll(userLink.id)
+        // // posForm() Add splash 
     })
 }
 
@@ -108,22 +109,23 @@ function buildStagesBar(position){
         else {scrollingWrapper.scrollLeft -= 100;}
       });
 
-    position.stages.forEach(stage => {
-       
-        let stageDiv = document.createElement("div")
-        stageDiv.classList.add("stage-card")
-        stageDiv.id = `stage${stage.id}`
-        // stageDiv.innerText = stage.title
-        stageDiv.innerHTML = `<br><h2>${stage.title}<h2><br>`
-        stageDiv.onclick = ()=> {
-            console.log(`${stage.title} button was clicked`)
-            buildStageShow(stage)
+    if (position){
+        position.stages.forEach(stage => {
+            let stageDiv = document.createElement("div")
+            stageDiv.classList.add("stage-card")
+            stageDiv.id = `stage${stage.id}`
+            // stageDiv.innerText = stage.title
+            stageDiv.innerHTML = `<br><h2>${stage.title}<h2><br>`
+            stageDiv.onclick = ()=> {
+                console.log(`${stage.title} button was clicked`)
+                buildStageShow(stage)
     
-            fetchStageTasks(stage.id)
-            allNotes(stage)
-        } 
-        scrollingWrapper.append(stageDiv)
-    })
+                fetchStageTasks(stage.id)
+                allNotes(stage)
+            } 
+            scrollingWrapper.append(stageDiv)
+        })
+    }
     let addStage = document.createElement("div")
     addStage.id = "addStageCard"
     addStage.classList.add("stage-card")

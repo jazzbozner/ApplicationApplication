@@ -4,9 +4,6 @@ const userDisplay = document.querySelector('.logged-in-user')
 
 function buildSignUpForm() {
     parentDiv.style.display = 'none'
-    // STAGE_TITLE.setAttribute("hidden", true)
-
-
 
     const brk1 = document.createElement('br')
     const brk2 = document.createElement('br')
@@ -144,6 +141,22 @@ function postUser(user) {
     .then(user => changePageView(user))
 }
 
+function refreshView(){
+    // clear:
+    posViewBar.innerText = ""
+    posViewMenu.innerText = ""
+    taskListUL.innerText = ""
+    document.querySelector("div#task-list-title").innerText = ""
+    scrollingWrapper.innerText = ""
+    STAGE.innerText = ""
+    notesContainerDiv.innerText = ""
+    buildStagesBar(position)
+    fetchAll(userLink.id)
+}
+
+
+
+
+
 buildSignUpForm()
 buildLoginForm()
-
