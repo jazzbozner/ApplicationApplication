@@ -4,9 +4,6 @@ const userDisplay = document.querySelector('.logged-in-user')
 
 function buildSignUpForm() {
     parentDiv.style.display = 'none'
-    // STAGE_TITLE.setAttribute("hidden", true)
-
-
 
     const brk1 = document.createElement('br')
     const brk2 = document.createElement('br')

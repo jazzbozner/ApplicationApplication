@@ -33,6 +33,7 @@ class PositionsController < ApplicationController
     end 
     
     def destroy 
+        byebug
         @position.destroy
         # render json:"Position Deleted"
     end 

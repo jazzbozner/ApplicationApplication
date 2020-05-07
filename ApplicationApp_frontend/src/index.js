@@ -22,7 +22,7 @@ const STAGE_CARD_VIEW = document.body.querySelector(".stage-card-view")
 const POSITION_URL = "http://localhost:3000/positions"
 const userLink = document.body.querySelector(".home")
 const posMenu = document.body.querySelector(".positions")
-const posMenuUl = document.getElementById("positions-ul")
+// const posMenuUl = document.getElementById("positions-ul")
 const posView = document.body.querySelector(".position-view")
 const posViewBar = document.getElementById("pos-view-bar")
 const posViewMenu = document.getElementById("pos-view-bar-content")
@@ -32,7 +32,7 @@ const USER_URL = "http://localhost:3000/users"
 
 // pre "accepted change before upstream" --> not necessary
 // const userId = 1
-// const posMenuDiv = document.getElementById("positions-div")
+const posMenuDiv = document.getElementById("positions-div")
 // const stageUl = document.getElementById('stage-list')
 
 
@@ -118,6 +118,7 @@ function buildStagesBar(position){
         stageDiv.onclick = ()=> {
             console.log(`${stage.title} button was clicked`)
             buildStageShow(stage)
+    
             fetchStageTasks(stage.id)
             allNotes(stage)
         } 
@@ -144,7 +145,7 @@ function buildLeftColumn(user){
     // userName.innerText = user.username
     // userLink.id = user.id 
     // userLink.innerHTML = ""
-    posMenuUl.innerHTML = ""
+    // posMenuUl.innerHTML = ""
     // let userName = document.createElement("h2")
     // userName.innerText = user.username
     // userLink.id = user.id 
@@ -162,7 +163,9 @@ function buildLeftColumn(user){
 
     let newPosBtn = buttonBuilders()
     posMenuDiv.appendChild(newPosBtn)
-    userLink.appendChild(userName)
+
+    // userLink.appendChild(userName)
+
     // let newPosBtn = document.createElement("button")
     // newPosBtn.innerText = "+"
     // newPosBtn.onclick = () => posForm()

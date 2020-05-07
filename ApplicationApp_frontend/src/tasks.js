@@ -100,10 +100,10 @@ function buildTaskForm(task=""){
         const taskForm = document.createElement("form")
         taskForm.id = "new-task"
         taskFormDIV.append(taskForm)
-        // const cancelButton = document.createElement("button")
+        const cancelButton = document.createElement("button")
         
-        // cancelButton.type = "reset"
-        // cancelButton.innerText = "Cancel"
+        cancelButton.type = "reset"
+        cancelButton.innerText = "Cancel"
         taskForm.innerHTML = "<br>Create a New Task:<br><input name='title' placeholder='Task Title' required><br> <input name='details' placeholder='Task Details' required> <br> " +
         "Priority: <select name='priority' required><option value='3'>Low</option><option value='2'>Medium</option><option value='1'>High</option></select> <br>" +
         "Status:<select name='status'  required><option value='not started'>Not Started</option><option value='in progress'>In Progress</option><option value='completed'>Completed</option></select> <br>" +
