@@ -2,6 +2,13 @@ class UsersController < ApplicationController
     before_action :set_user, only: [:show, :update, :destroy]
     # All Controllers are working, not sure how to handle errors -> instance will only have errors if we have validations on models --> could also put validations on the front end so all requests have clean/valid data as inputs 
 
+    def login
+        if User.find_by(username:params[:username]).password == params[:password]
+            @user = User.find_by(username:params[:username])
+            render json:@user
+        end
+    end
+
     def show
         render json: @user, include: ['positions']
         # ['positions.stages.notes']
@@ -29,9 +36,8 @@ class UsersController < ApplicationController
     end 
     
     def destroy 
-        byebug
         @user.destroy
-        render json:"User Deleted"
+        # render json:"User Deleted"
     end 
 
     private 

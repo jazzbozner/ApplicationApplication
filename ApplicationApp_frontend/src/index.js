@@ -23,7 +23,9 @@ const posMenuUl = document.getElementById("positions-ul")
 const posView = document.body.querySelector(".position-view")
 // user id
 const USER_URL = "http://localhost:3000/users"
-const userId = 1
+
+// const userId = userLink.id
+const parentDiv = document.body.querySelector('.parent')
 // Analytics
 const graphs = document.body.querySelector(".graphs")
 
@@ -34,7 +36,6 @@ const graphs = document.body.querySelector(".graphs")
 // fetches 
 
 function fetchAll(userId){
-    debugger
     fetch(`${USER_URL}/${userId}`)
     .then(resp => resp.json())
     .then(user => buildLeftColumn(user))
@@ -49,7 +50,6 @@ function fetchPosition(posId){
 }
 
 function deletePos(position){
-    debugger
     fetch(`${POSITION_URL}/${position.id}`,{
         method: "DELETE",
         headers: {
@@ -58,7 +58,7 @@ function deletePos(position){
         }
     })
     .then(() => {
-        fetchAll(userId)
+        fetchAll(userLink.id)
         // posForm() Add splash 
     })
 }
@@ -79,7 +79,7 @@ function submitPosition(positionObj, method=""){
     })
     .then(resp => resp.json())
     .then(position => {
-        fetchAll(userId)
+        fetchAll(userLink.id)
         buildPosView(position)
     })
 }
@@ -123,9 +123,9 @@ function buildStagesBar(position){
 function buildLeftColumn(user){
     // userLink.innerHTML = ""
     posMenuUl.innerHTML = ""
-    let userName = document.createElement("h2")
-    userName.innerText = user.username
-    userLink.id = user.id 
+    // let userName = document.createElement("h2")
+    // userName.innerText = user.username
+    // userLink.id = user.id 
     // have a link for usrname
     // userName.onclick = ()=> openUser(user)
     
@@ -557,8 +557,8 @@ function showDetails(){
 }
 
 // invoke functions
-buttonBuilders()
-fetchAll(userId)
+// buttonBuilders()
+// fetchAll(userId)
 
 // function() {
 //     function scrollHorizontally(e) {
