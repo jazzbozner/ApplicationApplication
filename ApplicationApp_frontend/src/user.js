@@ -91,35 +91,6 @@ function handleUserLogin() {
     })
 }
 
-function logoutUser() {
-    let logout = document.getElementById('logout-btn')
-    logout.addEventListener('click', () => {
-        location.reload()
-        userLink.id = ''
-        buildLoginForm();
-        signupDiv.style.display = 'block'
-        signupTitle.style.display = 'block'
-        parentDiv.style.display = 'none'
-    })
-}
-
-function changePageView(user) {
-    
-    const loginForm = document.getElementById('login-form')
-    loginForm.remove()
-    signupDiv.style.display = 'none'
-    signupTitle.style.display = "none"
-    parentDiv.style.display = 'grid'
-    userDisplay.style.display = 'block'
-    userDisplay.innerHTML = `${user.username} <button id='logout-btn'> Logout </button>`
-    userLink.id = user.id 
-    
-    fetchAll(user.id);
-    buttonBuilders();
-}
-
-
-
 function handleUserSubmit() {
     event.preventDefault();
     const user = {
@@ -129,6 +100,31 @@ function handleUserSubmit() {
         password: event.target.password.value
     }
     postUser(user)
+}
+
+function logoutUser() {
+    let logout = document.getElementById('logout-btn')
+    logout.addEventListener('click', () => {
+        location.reload()
+        userLink.id = ''
+        buildLoginForm();
+        signupDiv.style.display = 'block'
+        parentDiv.style.display = 'none'
+    })
+}
+
+function changePageView(user) {
+    
+    const loginForm = document.getElementById('login-form')
+    loginForm.remove()
+    signupDiv.style.display = 'none'
+    parentDiv.style.display = 'grid'
+    userDisplay.style.display = 'block'
+    userDisplay.innerHTML = `${user.username} <button id='logout-btn'> Logout </button>`
+    userLink.id = user.id 
+    
+    fetchAll(user.id);
+    buttonBuilders();
 }
 
 function postUser(user) {
