@@ -26,13 +26,14 @@ const posMenu = document.body.querySelector(".positions")
 const posView = document.body.querySelector(".position-view")
 const posViewBar = document.getElementById("pos-view-bar")
 const posViewMenu = document.getElementById("pos-view-bar-content")
+const posMenuDiv = document.getElementById("positions-div")
+
 // .body.querySelector(".pos-content")
 // user id
 const USER_URL = "http://localhost:3000/users"
 
 // pre "accepted change before upstream" --> not necessary
 // const userId = 1
-const posMenuDiv = document.getElementById("positions-div")
 // const stageUl = document.getElementById('stage-list')
 
 
@@ -96,6 +97,8 @@ function submitPosition(positionObj, method=""){
     .then(position => {
         fetchAll(userLink.id)
         buildPosView(position)
+        document.getElementById("new_position").innerHTML = ""
+        buildStagesBar(position)
     })
 }
 
@@ -123,6 +126,7 @@ function buildStagesBar(position){
                 fetchStageTasks(stage.id)
                 allNotes(stage)
             } 
+            // buildStageShow(stage)
             scrollingWrapper.append(stageDiv)
         })
     }
@@ -142,7 +146,7 @@ function buildLeftColumn(user){
 
 // older 'changes pre upstream'
     // userLink.innerHTML = ""
-    // posMenuDiv.innerHTML = ""
+    posMenuDiv.innerHTML = ""
     // let userName = document.createElement("h2")
     // userName.innerText = user.username
     // userLink.id = user.id 
@@ -215,7 +219,10 @@ function buildPosView(position){
 
     editBtn.innerText = "Edit Position"
     editBtn.classList.add("button")
-    editBtn.onclick = ()=> posForm(position)
+    editBtn.onclick = ()=>{
+        // refreshView()
+        posForm(position)
+    } 
 
     deleteBtn.innerText = "Delete Position"
     deleteBtn.classList.add("button")
@@ -536,7 +543,7 @@ function posForm(position=""){
     formDiv.appendChild(cancelBtn)
 
     posViewBar.innerHTML = ""
-    posViewBar.appendChild(formDiv)
+    document.body.querySelector(".div2").appendChild(formDiv)
     let form = document.getElementById("position-form")
     form.addEventListener("submit", ()=> handlePosSubmit(position))
 }
@@ -576,7 +583,17 @@ function buttonBuilders(){
     newPosBtn.classList.add("new-pos-link")
     newPosBtn.innerText = "Add a Position"
     // posMenu.appendChild(newPosBtn);
-    newPosBtn.onclick = () => posForm()
+    newPosBtn.onclick = () => {
+        posForm()
+        closePosNav()
+        notesContainerDiv.innerHTML = ""
+        taskListUL.innerHTML = ""
+        // stage view and stage card 
+        scrollingWrapper.innerHTML = ""
+        // buildStagesBar(position)
+        STAGE_CARD_VIEW.innerHTML = ""
+        posViewMenu.innerHTML = ""
+    } 
     return newPosBtn
 }
 
@@ -592,7 +609,11 @@ function buildPosP(position){
     let p = document.createElement("p")
         p.onclick = ()=> {
             buildPosView(position)
+
             fetchPosition(position.id)
+            notesContainerDiv.innerHTML = ""
+            taskListUL.innerHTML = ""
+            STAGE_CARD_VIEW.innerHTML = ""
             closePosNav()
         } 
         // li.onclick = ()=> buildPosView(position); //include buildStageLIst(position) function to populate position areas on position click and first/last stage area on position click 
