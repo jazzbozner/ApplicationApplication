@@ -311,20 +311,26 @@ border-radius: 20px;
     /* padding: 15px; */
     column-gap: 10px;
     border-radius: 20px;
-    row-gap: 1em;
+    row-gap: 2em;
     padding-left: 10px;
     padding-right: 10px;
-  
+
 }
 
 .task-list li{
   row-gap: 1em;
+  padding-left: 10px;
+  padding-right: 10px;
 
 }
 
-.high { background-image:url("assets/chevron.png"); border-radius: 20px; border-width: thick}
-.medium {background-image:url("assets/seigaiha.png");border-radius: 20px; border-width: medium}
-.low { background-image: url("assets/stonehaven.png");border-radius: 20px; border-width: thin}
+.high { background-image:url("assets/cubes.png"); border-radius: 20px; 
+  /* border-style: solid;
+  border-width: medium;
+  border-color: rgb(94, 91, 87); */
+}
+.medium {background-image:url("assets/seigaiha.png");border-radius: 20px;}
+.low { background-image: url("assets/tex2res2.png");border-radius: 20px; }
 
 /* menu stylings */
 
