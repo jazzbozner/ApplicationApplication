@@ -17,27 +17,17 @@ const scrollingWrapper = document.body.querySelector(".scrolling-wrapper")
 const stageUl = document.getElementById('stage-list')
 const STAGE_TITLE = document.body.querySelector(".div3")
 const STAGE_CARD_VIEW = document.body.querySelector(".stage-card-view")
-
 //  Positions
 const POSITION_URL = "http://localhost:3000/positions"
 const userLink = document.body.querySelector(".home")
 const posMenu = document.body.querySelector(".positions")
-// const posMenuUl = document.getElementById("positions-ul")
 const posView = document.body.querySelector(".position-view")
 const posViewBar = document.getElementById("pos-view-bar")
 const posViewMenu = document.getElementById("pos-view-bar-content")
 const posMenuDiv = document.getElementById("positions-div")
-
-// .body.querySelector(".pos-content")
 // user id
 const USER_URL = "http://localhost:3000/users"
-
-// pre "accepted change before upstream" --> not necessary
-// const userId = 1
-// const stageUl = document.getElementById('stage-list')
-
-
-// const userId = userLink.id
+// container parent
 const parentDiv = document.body.querySelector('.parent')
 // Analytics
 const graphs = document.body.querySelector(".graphs")
@@ -54,7 +44,6 @@ function fetchAll(userId){
     fetch(`${USER_URL}/${userId}`)
     .then(resp => resp.json())
     .then(user => buildLeftColumn(user))
-
 }
 
 function fetchPosition(posId){
@@ -73,9 +62,7 @@ function deletePos(position){
         }
     })
     .then(() => {
-        refreshView()
-        // fetchAll(userLink.id)
-        // // posForm() Add splash 
+        refreshView() 
     })
 }
 
@@ -166,19 +153,8 @@ function buildLeftColumn(user){
     title.innerText = "Positions"
     posMenuDiv.prepend(title)
 
-
     let newPosBtn = buttonBuilders()
     posMenuDiv.appendChild(newPosBtn)
-
-    // userLink.appendChild(userName)
-
-    // let newPosBtn = document.createElement("button")
-    // newPosBtn.innerText = "+"
-    // newPosBtn.onclick = () => posForm()
-    // posMenu.prepend(newPosBtn)
-    
-    // userLink.appendChild(userName)
-    
 }
 
 function buildPosView(position){
@@ -632,6 +608,19 @@ function cancelAction(position){
 function showDetails(){
     let detailDiv = document.querySelector("#pos-details")
     detailDiv.toggleAttribute("hidden")
+}
+
+function refreshView(){
+    // clear:
+    posViewBar.innerText = ""
+    posViewMenu.innerText = ""
+    taskListUL.innerText = ""
+    document.querySelector("div#task-list-title").innerText = ""
+    scrollingWrapper.innerText = ""
+    STAGE.innerText = ""
+    notesContainerDiv.innerText = ""
+    buildStagesBar(position)
+    fetchAll(userLink.id)
 }
 
 // invoke functions
