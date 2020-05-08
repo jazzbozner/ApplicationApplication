@@ -4,7 +4,24 @@
   border-radius: 10px;
 }
 
+.signup, .signup-title {
+  /* padding-top: 15px; */
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  font-size: 20px;
+  zoom: 155%;
+}
 
+.signup-title p{
+  font-size: 32px;
+  /* font-weight: bold; */
+}
+
+header h4{
+  align-self: center;
+  /* align-content: center; */
+}
 body {
     background-image: url("assets/grey_wash_wall.png");
     padding: 50px;
@@ -25,6 +42,7 @@ body {
     border-radius: 20px;
     align-items: center;
     border-style: groove;
+
 }
 
 .nav li {
@@ -135,6 +153,10 @@ body {
     border-style: groove;
 }
 
+
+
+
+
 /* original */
 /* .parent {
     display: flex;
@@ -160,8 +182,10 @@ body {
 
 .note-card{
     padding-right: 100px;
+    padding-left: 20px;
     background-image: url("assets/grey_wash_wall.png");
     border-radius: 20px;
+    color: whitesmoke;
 }
 
 #note-form{
@@ -258,9 +282,7 @@ border-radius: 20px;
 }
 
 
-.high { background-color: rgb(231, 222, 221); border-radius: 20px;}
-.medium {background-color: grey;border-radius: 20px;}
-.low { background-color: white;border-radius: 20px;}
+
 
 #new-task, #edit-task{
     display: block;
@@ -286,15 +308,23 @@ border-radius: 20px;
 .task-list {
     position: sticky; 
     height: 500px; 
-    /* overflow: scroll;  */
-    padding: 15px;
+    /* padding: 15px; */
     column-gap: 10px;
     border-radius: 20px;
-    /* background-image: url("assets/grey_wash_wall.png"); */
-    /* position: -webkit-sticky;
-    position: sticky;
-    top:0; */
+    row-gap: 1em;
+    padding-left: 10px;
+    padding-right: 10px;
+  
 }
+
+.task-list li{
+  row-gap: 1em;
+
+}
+
+.high { background-color: rgb(231, 222, 221); border-radius: 20px; }
+.medium {background-color: grey;border-radius: 20px; }
+.low { background-color: white;border-radius: 20px; }
 
 /* menu stylings */
 

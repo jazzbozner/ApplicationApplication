@@ -18,7 +18,7 @@ function buildStageShow(stage) {
     // endDate.innerText = `End date: ${stage.enddate}`
     editBtn.innerText = 'Edit'
     deleteBtn.innerText ='Delete'
-
+    
     editBtn.addEventListener('click', ()=> stageForm(stage))
     // if stage form exist new form
     // else set values
@@ -29,6 +29,7 @@ function buildStageShow(stage) {
 }
 
 function stageForm(object, condition="") { //<--- position will go in the argument whenthe stage button is moved.
+    
     if (condition === "new") {
         let position = object
         STAGE.innerHTML = 'New Stage'
@@ -129,6 +130,8 @@ function handleDeleteStage(stage) {
         let card = document.getElementById(`stage-card`)
         div.remove()
         card.remove()
+        taskListUL.innerHTML = ""
+        notesContainerDiv.innerHTML = ""
     })
     
 }

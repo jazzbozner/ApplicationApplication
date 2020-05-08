@@ -38,11 +38,14 @@ function buildTaskList(stage){
     buildTaskForm()
 
     let tasks = stage.tasks
+
+    let sortedTasks = tasks.sort(compareValues("duedate"))
+
     taskDIV.id = `stage${stage.id}-tasks`
 
     taskListUL.innerHTML = ""
     taskListUL.style = "list-style-type:none"
-    tasks.forEach(task => prependTask(task))
+    sortedTasks.forEach(task => prependTask(task))
 
     if (!document.getElementById("task-toggle-button")){
         let toggleTaskForm = document.createElement("button")
@@ -101,8 +104,9 @@ function buildTaskForm(task=""){
         taskForm.id = "new-task"
         taskFormDIV.append(taskForm)
         const cancelButton = document.createElement("button")
+        cancelButton.addEventListener('click', ()=>{taskFormDIV.innerHTML = ""; buildTaskForm("");toggleForm()})
         
-        cancelButton.type = "reset"
+        cancelButton.type = "button"
         cancelButton.innerText = "Cancel"
         taskForm.innerHTML = "<br>Create a New Task:<br><input name='title' placeholder='Task Title' required><br> <input name='details' placeholder='Task Details' required> <br> " +
         "Priority: <select name='priority' required><option value='3'>Low</option><option value='2'>Medium</option><option value='1'>High</option></select> <br>" +
@@ -121,8 +125,9 @@ function buildTaskForm(task=""){
     else{
         taskFormDIV.innerHTML = ""
         const cancelButton = document.createElement("button")
+        cancelButton.addEventListener('click', ()=>{taskFormDIV.innerHTML = ""; buildTaskForm(""); toggleForm()})
         const editForm = document.createElement("form")
-        cancelButton.type = "reset"
+        cancelButton.type = "button"
         cancelButton.innerText = "Cancel"
         editForm.id = "edit-task"
         editForm.innerHTML = `<br>Edit this Task:<br><input name='title' value='${task.title}'><br> <input name='details' value='${task.details}'> <br> ` +
@@ -138,8 +143,12 @@ function buildTaskForm(task=""){
             editForm.innerHTML = ""
             buildTaskForm("")
         })
-        cancelButton.onclick = console.log("cancellled)")
-        cancelButton.addEventListener('click', ()=>{taskFormDIV.innerHTML = ""; buildTaskForm("")})
+        // cancelButton.onclick = console.log("cancellled)")
+        // cancelButton.addEventListener('click', ()=>{taskFormDIV.innerHTML = ""; buildTaskForm("")})
+
+        cancelButton.addEventListener('click', ()=>{taskFormDIV.innerHTML = ""; buildTaskForm("");})
+
+        // cancelButton.onclick = () => toggleForm()
         editForm.appendChild(cancelButton)
     }
 }
@@ -215,3 +224,29 @@ function toggleForm(condition = ""){
         taskFormDIV.toggleAttribute("hidden")
     }  
 }
+
+// sort the tasks
+
+function compareValues(key, order = 'desc') {
+    return function innerSort(a, b) {
+      if (!a.hasOwnProperty(key) || !b.hasOwnProperty(key)) {
+        // property doesn't exist on either object
+        return 0;
+      }
+  
+      const varA = (typeof a[key] === 'string')
+        ? a[key].toUpperCase() : a[key];
+      const varB = (typeof b[key] === 'string')
+        ? b[key].toUpperCase() : b[key];
+  
+      let comparison = 0;
+      if (varA > varB) {
+        comparison = 1;
+      } else if (varA < varB) {
+        comparison = -1;
+      }
+      return (
+        (order === 'desc') ? (comparison * -1) : comparison
+      );
+    };
+  }
